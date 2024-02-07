@@ -1,0 +1,20 @@
+.text {
+	color: var(--text-white);
+	font-family: Akrobat;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 200;
+	line-height: 100%; /* 23.4px */
+
+	&:nth-child(n + 2) {
+		line-height: 130%;
+	}
+
+	&_black {
+		color: rgb(35, 34, 33);
+		font-family: Akrobat;
+		font-size: 18px;
+		font-weight: 300;
+		letter-spacing: 0%;
+	}
+}

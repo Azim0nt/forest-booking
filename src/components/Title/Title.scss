@@ -1,0 +1,20 @@
+.title {
+	color: var(--text-white);
+	font-family: Anticva;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-transform: uppercase;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+
+	&_black {
+		color: #232221;
+	}
+
+	&_right {
+		text-align: end;
+	}
+}

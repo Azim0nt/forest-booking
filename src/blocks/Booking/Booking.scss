@@ -1,0 +1,18 @@
+.booking {
+	margin-top: 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 392px;
+	.container {
+		height: 100%;
+	}
+
+	&__wrapper {
+		height: 100%;
+		width: 1007px;
+	}
+	&__bg {
+		position: absolute;
+	}
+}

@@ -1,0 +1,22 @@
+.questions {
+	margin-top: 80px;
+
+	&__wrapper {
+		background: #3b3b3b;
+		padding: 80px 40px;
+		border-radius: 24px;
+		display: grid;
+		grid-template-columns: 626px 627px;
+		grid-template-rows: 679px;
+	}
+
+	&__image {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 24px;
+			object-position: 0px 0px;
+		}
+	}
+}
