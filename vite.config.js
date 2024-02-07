@@ -11,17 +11,17 @@ export default defineConfig({
 	},
 	plugins: [
 		react(),
-		// ViteImageOptimizer({
-		// 	jpeg: {
-		// 		quality: 90,
-		// 	},
-		// 	jpg: {
-		// 		quality: 90,
-		// 	},
-		// 	png: {
-		// 		quality: 90,
-		// 	},
-		// }),
+		ViteImageOptimizer({
+			jpeg: {
+				quality: 90,
+			},
+			jpg: {
+				quality: 90,
+			},
+			png: {
+				quality: 90,
+			},
+		}),
 	],
 	build: {
 		outDir: 'dist',
