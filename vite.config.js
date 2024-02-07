@@ -13,13 +13,13 @@ export default defineConfig({
 		react(),
 		ViteImageOptimizer({
 			jpeg: {
-				quality: 90,
+				quality: 80,
 			},
 			jpg: {
-				quality: 90,
+				quality: 80,
 			},
 			png: {
-				quality: 90,
+				quality: 80,
 			},
 		}),
 	],
