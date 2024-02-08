@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import autoprefixer from 'autoprefixer'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import viteImagemin from 'vite-plugin-imagemin'
 
 export default defineConfig({
 	css: {
@@ -11,15 +12,42 @@ export default defineConfig({
 	},
 	plugins: [
 		react(),
-		ViteImageOptimizer({
-			jpeg: {
-				quality: 80,
+		// ViteImageOptimizer({
+		// 	jpeg: {
+		// 		quality: 80,
+		// 	},
+		// 	jpg: {
+		// 		quality: 80,
+		// 	},
+		// 	png: {
+		// 		quality: 80,
+		// 	},
+		// }),
+		viteImagemin({
+			gifsicle: {
+				optimizationLevel: 7,
+				interlaced: false,
 			},
-			jpg: {
-				quality: 80,
+			optipng: {
+				optimizationLevel: 7,
 			},
-			png: {
-				quality: 80,
+			mozjpeg: {
+				quality: 20,
+			},
+			pngquant: {
+				quality: [0.8, 0.9],
+				speed: 4,
+			},
+			svgo: {
+				plugins: [
+					{
+						name: 'removeViewBox',
+					},
+					{
+						name: 'removeEmptyAttrs',
+						active: false,
+					},
+				],
 			},
 		}),
 	],
