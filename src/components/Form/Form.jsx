@@ -6,24 +6,22 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { IMaskInput } from 'react-imask'
 import { useId } from 'react'
+import './Form.scss'
 
 const Form = () => {
 	const schema = yup
 		.object()
 		.shape({
-			firstName: yup.string().required('First name is required'),
-			mail: yup
-				.string()
-				.email('Invalid email address')
-				.required('Email Address is required'),
+			firstName: yup.string().required('Обязательно для ввода').max(20),
 			phone: yup
 				.string()
-				.matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, 'Invalid phone number') // Проверка на правильный формат номера
-				.required('Phone number is required'), // Проверка на заполненность поля
+				.matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, 'Неверно введен номер')
+				.required('Обязательно для ввода'),
 			select: yup.object().shape({
 				value: yup.string(),
 				label: yup.string(),
 			}),
+			textarea: yup.string().max(30, 'Максимум 30 символов'),
 		})
 		.required()
 
@@ -37,9 +35,9 @@ const Form = () => {
 	} = useForm({
 		defaultValues: {
 			firstName: '',
-			mail: '',
 			phone: '',
 			select: { value: 'Telegram', label: 'Telegram' },
+			textarea: '', // Добавляем значение по умолчанию для текстовой области
 		},
 		resolver: yupResolver(schema),
 	})
@@ -60,18 +58,12 @@ const Form = () => {
 				<input
 					{...register('firstName')}
 					aria-invalid={errors.firstName ? 'true' : 'false'}
-					placeholder='First Name'
+					placeholder='Имя*'
+					className='input-form'
 				/>
 				{errors.firstName && (
 					<p style={{ color: 'red' }}>{errors.firstName.message}</p>
 				)}
-
-				<input
-					{...register('mail')}
-					aria-invalid={errors.mail ? 'true' : 'false'}
-					placeholder='Email'
-				/>
-				{errors.mail && <p style={{ color: 'red' }}>{errors.mail.message}</p>}
 
 				<Controller
 					name='phone'
@@ -82,20 +74,19 @@ const Form = () => {
 							definitions={{
 								0: /[0-9]/,
 							}}
-							placeholder='+7 (___) ___-__-__'
+							placeholder='Телефон*'
 							value={field.value}
 							onAccept={value => field.onChange(value)}
 							inputRef={input => {
-								field.ref(input) // Устанавливаем ref для контроллера
+								field.ref(input)
 								if (errors.phone) {
-									// Если есть ошибка телефона
-									input.focus() // Устанавливаем фокус на поле ввода
+									input.focus()
 								}
 							}}
+							className='input-form'
 						/>
 					)}
 				/>
-
 				{errors.phone && <p style={{ color: 'red' }}>{errors.phone.message}</p>}
 
 				<Controller
@@ -114,6 +105,18 @@ const Form = () => {
 						/>
 					)}
 				/>
+
+				{/* Добавляем текстовую область */}
+				<textarea
+					{...register('textarea')} // Регистрируем текстовую область с реакт-хук-форм
+					aria-invalid={errors.textarea ? 'true' : 'false'}
+					placeholder='Комментарий (необязательное поле)'
+					className='textarea-form' // Добавляем класс стилей для текстовой области
+				/>
+				{errors.textarea && (
+					<p style={{ color: 'red' }}>{errors.textarea.message}</p>
+				)}
+
 				<Button type='submit'>Submit</Button>
 			</form>
 		)

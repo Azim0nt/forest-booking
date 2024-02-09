@@ -1,0 +1,29 @@
+form {
+	.input-form {
+		border: 1px solid var(--seryy);
+		border-radius: 16px;
+		padding: 10px 24px;
+		width: 301px;
+		height: 56px;
+		background: var(--korichnevyy);
+		color: var(--svetlyy);
+	}
+
+	input:focus {
+		outline: none;
+	}
+
+	.textarea-form {
+		border: 1px solid var(--seryy);
+		border-radius: 16px;
+		padding: 24px;
+		width: 297px;
+		height: 205px;
+		background: var(--korichnevyy);
+		color: var(--svetlyy);
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
