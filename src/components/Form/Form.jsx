@@ -11,6 +11,35 @@ import errorImage from '/icons/error.svg'
 import penOk from '/icons/pen.svg'
 
 const Form = () => {
+	//отправка данных
+	const onSubmit = async data => {
+		try {
+			console.log(data)
+			const response = await fetch(
+				`https://api.telegram.org/bot6786881637:AAErSPNxAciTEWDmDIcK646YGStChwKK8Ec/sendMessage`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						chat_id: 231399891, // Идентификатор чата или канала
+						text: `Новое сообщение из формы:\nИмя: ${data.firstName}\nТелефон: ${data.phone}\nПредпочтительный способ связи: ${data.select.value}\nКомментарий: ${data.textarea}`,
+					}),
+				}
+			)
+
+			if (!response.ok) {
+				throw new Error('Ошибка отправки сообщения')
+			}
+
+			// Обработка успешной отправки сообщения
+			console.log('Сообщение успешно отправлено в телеграм-канал')
+		} catch (error) {
+			console.error('Ошибка отправки сообщения:', error)
+		}
+	}
+
 	const schema = yup
 		.object()
 		.shape({
@@ -51,7 +80,7 @@ const Form = () => {
 
 	const inputRef = useRef(null)
 
-	const onSubmit = data => console.log(data)
+	// const onSubmit = data => console.log(data)
 
 	return (
 		hasMounted && (
