@@ -37,3 +37,7 @@ ul {
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 998;
 }
+
+html {
+	scroll-behavior: smooth; /* Делает прокрутку плавной */
+}

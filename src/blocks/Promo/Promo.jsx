@@ -62,7 +62,10 @@ const Promo = () => {
 								</p>
 							</div>
 							<div className='promo__geo'>
-								<a href='#' className='promo__geo-link'>
+								<a
+									href='https://yandex.ru/maps/org/vremya_lesa/191238425384/?from=mapframe&ll=60.600641%2C57.122401&z=10'
+									className='promo__geo-link'
+								>
 									<img src={map} alt='map' />
 									<div className='promo__geo-coordinates'>
 										57.122785 60.511281
@@ -89,9 +92,42 @@ const Promo = () => {
 						</div>
 						<div className='promo__swiper'>
 							<div className='promo__cutout'>
-								<div className='promo__arrow'>
-									<img src={arrow} alt='arrow' />
+								<div className='promo__corner-one'>
+									<svg
+										width='12'
+										height='11'
+										viewBox='0 0 12 11'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+									>
+										<path
+											fillRule='evenodd'
+											clipRule='evenodd'
+											d='M0.0511755 0H0V11H12V10.8784C11.9998 10.8781 11.9996 10.8779 11.9994 10.8776C5.75043 10.8776 0.617095 6.10115 0.0511755 0Z'
+											fill='#232221'
+										/>
+									</svg>
 								</div>
+								<div className='promo__corner-two'>
+									<svg
+										width='12'
+										height='11'
+										viewBox='0 0 12 11'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+									>
+										<path
+											fillRule='evenodd'
+											clipRule='evenodd'
+											d='M0.0511755 0H0V11H12V10.8784C11.9998 10.8781 11.9996 10.8779 11.9994 10.8776C5.75043 10.8776 0.617095 6.10115 0.0511755 0Z'
+											fill='#232221'
+										/>
+									</svg>
+								</div>
+
+								<a href='#home' className='promo__arrow'>
+									<img src={arrow} alt='arrow' />
+								</a>
 							</div>
 							<Swiper
 								// install Swiper modules

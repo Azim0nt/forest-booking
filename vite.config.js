@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react'
 import autoprefixer from 'autoprefixer'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import viteImagemin from 'vite-plugin-imagemin'
+import dotenv from 'dotenv'
+
+// Загрузка переменных среды из файла .env
+dotenv.config()
 
 export default defineConfig({
 	css: {

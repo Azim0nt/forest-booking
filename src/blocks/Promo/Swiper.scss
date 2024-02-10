@@ -15,6 +15,17 @@
 		}
 	}
 
+	&__corner-two {
+		position: absolute;
+	}
+
+	&__corner-one {
+		position: absolute;
+		top: -18px;
+		left: 0px;
+		width: 26px;
+	}
+
 	&__cutout {
 		position: absolute;
 		width: 112px;

@@ -10,7 +10,7 @@ import notImage from '/icons/not.svg'
 const Prices = () => {
 	return (
 		<>
-			<div className='prices'>
+			<div className='prices' id='prices'>
 				<div className='container'>
 					<div className='prices__wrapper'>
 						<div className='prices__blocks'>

@@ -1,5 +1,6 @@
 .prices {
 	margin-top: 40px;
+
 	&__wrapper {
 		padding: 80px 40px;
 		background: var(--korichnevyy);
@@ -13,7 +14,7 @@
 		width: 100%;
 		display: grid;
 		grid-template-columns: 821px 426px;
-		grid-template-rows: auto;
+		grid-template-rows: 464px;
 		justify-content: space-between;
 	}
 
@@ -47,6 +48,7 @@
 			position: relative;
 			display: flex;
 			align-items: center;
+			height: 22px;
 
 			&::before {
 				content: '';

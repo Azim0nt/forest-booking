@@ -57,6 +57,7 @@ form {
 		height: 205px;
 		background: var(--korichnevyy);
 		color: #afafaf;
+		resize: none;
 
 		&:focus {
 			outline: none;

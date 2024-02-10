@@ -9,35 +9,53 @@ import { useId } from 'react'
 import './Form.scss'
 import errorImage from '/icons/error.svg'
 import penOk from '/icons/pen.svg'
+import SendOk from '../SendOk/SendOk'
 
 const Form = () => {
+	const [isSubmitted, setIsSubmitted] = useState(false)
+	const [isErrorSubmitted, setIsErrorSubmitted] = useState(false)
+
 	//отправка данных
 	const onSubmit = async data => {
-		try {
-			console.log(data)
-			const response = await fetch(
-				`https://api.telegram.org/bot6786881637:AAErSPNxAciTEWDmDIcK646YGStChwKK8Ec/sendMessage`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						chat_id: -4186371579, // Идентификатор чата или канала
-						text: `Новое сообщение из формы:\nИмя: ${data.firstName}\nТелефон: ${data.phone}\nПредпочтительный способ связи: ${data.select.value}\nКомментарий: ${data.textarea}`,
-					}),
-				}
-			)
+		console.log('Сообщение успешно отправлено в телеграм-канал')
+		setIsSubmitted(true)
+		setTimeout(() => {
+			setIsSubmitted(false)
+		}, 2000)
+		// try {
+		// 	const response = await fetch(
+		// 		`https://api.telegram.org/bot${
+		// 			import.meta.env.VITE_TELEGRAM_TOKEN
+		// 		}/sendMessage`,
+		// 		{
+		// 			method: 'POST',
+		// 			headers: {
+		// 				'Content-Type': 'application/json',
+		// 			},
+		// 			body: JSON.stringify({
+		// 				chat_id: import.meta.env.VITE_CHAT_ID, // Идентификатор чата или канала
+		// 				text: `Новое сообщение из формы:\nИмя: ${data.firstName}\nТелефон: ${data.phone}\nПредпочтительный способ связи: ${data.select.value}\nКомментарий: ${data.textarea}`,
+		// 			}),
+		// 		}
+		// 	)
 
-			if (!response.ok) {
-				throw new Error('Ошибка отправки сообщения')
-			}
+		// 	if (!response.ok) {
+		// 		throw new Error('Ошибка отправки сообщения')
+		// 	}
 
-			// Обработка успешной отправки сообщения
-			console.log('Сообщение успешно отправлено в телеграм-канал')
-		} catch (error) {
-			console.error('Ошибка отправки сообщения:', error)
-		}
+		// 	// Обработка успешной отправки сообщения
+		// 	console.log('Сообщение успешно отправлено в телеграм-канал')
+		// 	isSubmitted(true)
+		// 	setTimeout(() => {
+		// 		setIsSubmitted(false)
+		// 	}, 2000) // 120000 миллисекунд = 2 минуты
+		// } catch (error) {
+		// 	console.error('Ошибка отправки сообщения:', error)
+		// setIsErrorSubmitted(true)
+		// setTimeout(() => {
+		// 	setIsErrorSubmitted(false)
+		// }, 2000)
+		// }
 	}
 
 	const schema = yup
@@ -187,6 +205,8 @@ const Form = () => {
 				</div>
 
 				<Button type='submit'>Свяжитесь со мной</Button>
+				{isSubmitted && <SendOk send={true} />}
+				{isErrorSubmitted && <SendOk send={false} />}
 			</form>
 		)
 	)

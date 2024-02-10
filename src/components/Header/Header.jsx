@@ -18,22 +18,22 @@ function Header() {
 						<nav className='menu'>
 							<ul>
 								<li>
-									<a href='#'>О доме</a>
+									<a href='#home'>О доме</a>
 								</li>
 								<li>
-									<a href='#'>Цена</a>
+									<a href='#prices'>Цена</a>
 								</li>
 								<li>
-									<a href='#'>О локации</a>
+									<a href='#location'>О локации</a>
 								</li>
 								<li>
-									<a href='#'>Как добраться</a>
+									<a href='#location__found'>Как добраться</a>
 								</li>
 								<li>
-									<a href='#'>Дополнительные услуги</a>
+									<a href='#exclusive'>Дополнительные услуги</a>
 								</li>
 								<li>
-									<a href='#'>Контакты</a>
+									<a href='#footer'>Контакты</a>
 								</li>
 							</ul>
 						</nav>

@@ -37,7 +37,7 @@ const Location = () => {
 	}
 	return (
 		<>
-			<div className='location'>
+			<div className='location' id='location'>
 				<div className='container'>
 					<div className='location__bg'>
 						<svg
@@ -126,7 +126,7 @@ const Location = () => {
 							насладиться чистотой и спокойствием загородной жизни.
 						</p>
 
-						<div className='location__found'>
+						<div className='location__found' id='location__found'>
 							<Title>Как нас найти</Title>
 
 							<div className='location__blocks'>

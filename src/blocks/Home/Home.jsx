@@ -1,6 +1,6 @@
 import Title from '../../components/Title/Title'
 import './Home.scss'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import photo1 from '/images/active-photo/1.png'
 import photo2 from '/images/active-photo/2.png'
 
@@ -9,7 +9,7 @@ const Home = () => {
 
 	return (
 		<>
-			<div className='home'>
+			<div className='home' id='home'>
 				<div className='container'>
 					<div className='home__wrapper'>
 						<div className='home__bg'>
@@ -76,7 +76,7 @@ const Home = () => {
 									<br />
 									<br />
 									Гриль-зона и банный чан добавляют шарма, создавая атмосферу
-									 праздника на природе.
+									праздника на природе.
 								</p>
 							</div>
 							<div className='home__active-photo'>

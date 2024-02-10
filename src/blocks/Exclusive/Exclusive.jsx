@@ -7,7 +7,7 @@ import exclusiveImage3 from '/images/exclusive/3.jpeg'
 const Exclusive = () => {
 	return (
 		<>
-			<div className='exclusive'>
+			<div className='exclusive' id='exclusive'>
 				<div className='container'>
 					<div className='exclusive__wrapper'>
 						<Title>Эксклюзивные услуги для вашего удовольствия</Title>
