@@ -21,4 +21,4 @@ RUN npm run build:client
 RUN npm run build:server
 
 # Определяем команду для запуска приложения
-CMD ["node", "start"]
+CMD ["npm", "start"]
