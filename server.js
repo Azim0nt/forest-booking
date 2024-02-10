@@ -5,8 +5,17 @@ import compression from 'compression'
 import sirv from 'sirv'
 
 const isProduction = process.env.NODE_ENV === 'production'
+
 const port = process.env.PORT || 3000
 const base = process.env.BASE || '/'
+
+if (process.env.NODE_ENV === 'production') {
+	// Выполняется, если приложение запущено в режиме продакшн
+	console.log('Приложение запущено в режиме продакшн')
+} else {
+	// Выполняется, если приложение запущено в режиме разработки
+	console.log('Приложение запущено в режиме разработки')
+}
 
 async function createViteServer() {
 	const vite = await createServer({
@@ -21,7 +30,7 @@ async function createViteServer() {
 	app.use(vite.middlewares)
 
 	// Middleware to serve fonts in development
-	app.use('/assets/fonts', express.static('./dist/client/assets/fonts'))
+	app.use('/assets/fonts', express.static('./dist/client/fonts'))
 
 	// CORS middleware
 	app.use((req, res, next) => {
@@ -71,7 +80,7 @@ async function createProductionServer() {
 	app.use(base, sirv('./dist/client', { extensions: [] }))
 
 	// Middleware to serve fonts in production
-	app.use('/assets/fonts', express.static('./dist/client/assets/fonts'))
+	app.use('/assets/fonts', express.static('./dist/client/fonts'))
 
 	// CORS middleware
 	app.use((req, res, next) => {
@@ -85,7 +94,7 @@ async function createProductionServer() {
 			const url = req.originalUrl.replace(base, '')
 
 			const template = await fs.readFile('./dist/client/index.html', 'utf-8')
-			const render = (await import('../dist/server/entry-server.js')).render
+			const render = (await import('./dist/server/entry-server.js')).render
 			const rendered = await render(url)
 
 			const html = template

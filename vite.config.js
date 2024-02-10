@@ -12,44 +12,44 @@ export default defineConfig({
 	},
 	plugins: [
 		react(),
-		// ViteImageOptimizer({
-		// 	jpeg: {
-		// 		quality: 80,
-		// 	},
-		// 	jpg: {
-		// 		quality: 80,
-		// 	},
-		// 	png: {
-		// 		quality: 80,
-		// 	},
-		// }),
-		viteImagemin({
-			gifsicle: {
-				optimizationLevel: 7,
-				interlaced: false,
+		ViteImageOptimizer({
+			jpeg: {
+				quality: 90,
 			},
-			optipng: {
-				optimizationLevel: 7,
+			jpg: {
+				quality: 90,
 			},
-			mozjpeg: {
-				quality: 20,
-			},
-			pngquant: {
-				quality: [0.8, 0.9],
-				speed: 4,
-			},
-			svgo: {
-				plugins: [
-					{
-						name: 'removeViewBox',
-					},
-					{
-						name: 'removeEmptyAttrs',
-						active: false,
-					},
-				],
+			png: {
+				quality: 90,
 			},
 		}),
+		// viteImagemin({
+		// 	gifsicle: {
+		// 		optimizationLevel: 7,
+		// 		interlaced: false,
+		// 	},
+		// 	optipng: {
+		// 		optimizationLevel: 7,
+		// 	},
+		// 	mozjpeg: {
+		// 		quality: 20,
+		// 	},
+		// 	pngquant: {
+		// 		quality: [0.8, 0.9],
+		// 		speed: 4,
+		// 	},
+		// 	svgo: {
+		// 		plugins: [
+		// 			{
+		// 				name: 'removeViewBox',
+		// 			},
+		// 			{
+		// 				name: 'removeEmptyAttrs',
+		// 				active: false,
+		// 			},
+		// 		],
+		// 	},
+		// }),
 	],
 	build: {
 		outDir: 'dist',

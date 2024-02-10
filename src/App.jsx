@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Header from './components/Header/Header'
@@ -13,9 +13,26 @@ import Location from './blocks/Location/Location'
 import Exclusive from './blocks/Exclusive/Exclusive'
 import Questions from './blocks/Questions/Questions'
 import Sale from './blocks/Sale/Sale'
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
+import Footer from './components/Footer/Footer'
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [isLoading, setIsLoading] = useState(true)
+
+	// useEffect(() => {
+	// 	// Функция, которая будет вызвана при загрузке всех ресурсов страницы
+	// 	const handleLoad = () => {
+	// 		setIsLoading(false) // Устанавливаем isLoading в false после загрузки
+	// 	}
+
+	// 	// Добавляем обработчик события для события загрузки
+	// 	window.addEventListener('load', handleLoad)
+
+	// 	// Убираем обработчик события при размонтировании компонента
+	// 	return () => {
+	// 		window.removeEventListener('load', handleLoad)
+	// 	}
+	// }, [])
 
 	return (
 		<>
@@ -31,6 +48,7 @@ function App() {
 			<Location />
 			<Exclusive />
 			<Questions />
+			<Footer />
 		</>
 	)
 }
