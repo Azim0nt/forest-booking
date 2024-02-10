@@ -23,7 +23,7 @@ const Form = () => {
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({
-						chat_id: 231399891, // Идентификатор чата или канала
+						chat_id: -4186371579, // Идентификатор чата или канала
 						text: `Новое сообщение из формы:\nИмя: ${data.firstName}\nТелефон: ${data.phone}\nПредпочтительный способ связи: ${data.select.value}\nКомментарий: ${data.textarea}`,
 					}),
 				}
