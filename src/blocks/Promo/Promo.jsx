@@ -65,6 +65,7 @@ const Promo = () => {
 								<a
 									href='https://yandex.ru/maps/org/vremya_lesa/191238425384/?from=mapframe&ll=60.600641%2C57.122401&z=10'
 									className='promo__geo-link'
+									target='_blank'
 								>
 									<img src={map} alt='map' />
 									<div className='promo__geo-coordinates'>
@@ -138,8 +139,6 @@ const Promo = () => {
 									clickable: true,
 								}}
 								scrollbar={false}
-								onSwiper={swiper => console.log(swiper)}
-								onSlideChange={() => console.log('slide change')}
 								direction='vertical'
 								navigation={{
 									nextEl: '.custom-next-button',

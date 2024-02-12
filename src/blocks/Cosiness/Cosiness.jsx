@@ -75,8 +75,6 @@ const Cosiness = () => {
 							spaceBetween={32}
 							slidesPerView={2}
 							scrollbar={{ draggable: true }}
-							onSwiper={swiper => console.log(swiper)}
-							onSlideChange={() => console.log('slide change')}
 							navigation={{
 								nextEl: '.cosiness-next-button',
 								prevEl: '.cosiness-prev-button',

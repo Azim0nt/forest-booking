@@ -1,0 +1,233 @@
+.date-picker {
+	&__wrapper {
+		position: fixed;
+		top: 50%; /* Разместить блок на половине высоты экрана */
+		left: 50%; /* Разместить блок на половине ширины экрана */
+		transform: translate(
+			-50%,
+			-50%
+		); /* Центрировать блок относительно его собственных размеров */
+		z-index: 7;
+		background: var(--korichnevyy);
+		border-radius: 24px;
+		padding: 80px 40px;
+		display: flex;
+		gap: 40px;
+		width: 691px;
+		height: 517px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title {
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 16px;
+		color: #fff;
+	}
+}
+
+.react-datepicker {
+	height: fit-content;
+	border: 0;
+	background: none;
+	display: flex;
+	justify-content: space-between;
+
+	&__header {
+		border: none;
+		background: none;
+	}
+
+	&__current-month {
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 16px;
+		color: var(--seryy);
+		text-transform: capitalize;
+	}
+
+	&__day-names {
+		margin-top: 16px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__day-name {
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 16px;
+		color: var(--seryy);
+	}
+
+	&__month {
+		margin-top: 16px;
+		width: 272px;
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	&__week {
+		margin: 0;
+		display: flex;
+		gap: 8px;
+	}
+
+	&__day {
+		margin: 0;
+		width: 32px;
+		height: 32px;
+		font-family: var(--font-family);
+		font-weight: 300;
+		font-size: 16px;
+		color: var(--svetlyy);
+
+		&--selected {
+			background: var(--svetlyy) !important;
+			color: #000;
+		}
+
+		&--disabled {
+			font-family: var(--font-family);
+			font-weight: 300;
+			font-size: 16px;
+			text-decoration: line-through;
+			color: var(--seryy);
+		}
+
+		&--in-range {
+			background: var(--seryy) !important;
+			opacity: 1;
+			color: var(--svetlyy);
+		}
+
+		&--range-start {
+			opacity: 1 !important;
+			color: #000;
+			background: var(--svetlyy) !important;
+		}
+
+		&--range-end {
+			opacity: 1 !important;
+			color: #000;
+			background: var(--svetlyy) !important;
+		}
+
+		&--in-selecting-range {
+			background: var(--seryy) !important;
+			color: var(--svetlyy);
+		}
+
+		&--in-selecting-range {
+			color: var(--svetlyy) !important;
+			// background: var(--svetlyy) !important;
+		}
+
+		&--selecting-range-end {
+			color: #000 !important;
+			background: var(--svetlyy) !important;
+		}
+
+		&--selecting-range-start {
+			color: #000;
+			background: var(--svetlyy) !important;
+		}
+	}
+
+	&__year-text--in-selecting-range {
+		color: var(--svetlyy) !important;
+	}
+
+	&__month-text--in-selecting-range {
+		color: var(--svetlyy) !important;
+		font-size: 33px !important;
+	}
+}
+
+.react-datepicker__day--range-start {
+	position: relative;
+	&::before {
+		width: 59px;
+		height: 25px;
+		background-color: var(--svetlyy);
+		content: 'День прибытия';
+		position: absolute;
+
+		top: -31px;
+		left: 12px;
+		background: url('/icons/date-up.svg');
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 8px;
+		color: var(--temno--korichnevyy);
+		border: none;
+		border-radius: 6px;
+		line-height: 190%;
+		padding: 0;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		opacity: 0; /* Начальная непрозрачность */
+		animation: fadeIn 0.5s forwards;
+	}
+
+	// &::after {
+	// 	content: '';
+	// 	position: absolute;
+	// 	top: -18px;
+	// 	left: 15px;
+	// 	width: 0;
+	// 	height: 0;
+	// 	border-left: 5px solid transparent; /* Размер основания треугольника */
+	// 	border-right: 5px solid transparent; /* Размер основания треугольника */
+	// 	border-top: 10px solid var(--svetlyy);
+	// }
+}
+
+.react-datepicker__day--range-end {
+	position: relative;
+	&::before {
+		width: 59px;
+		height: 20px;
+		background-color: var(--svetlyy);
+		content: 'День выезда';
+		position: absolute;
+		bottom: -37px;
+		left: 5px;
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 8px;
+		color: var(--temno--korichnevyy);
+		border: none;
+		border-radius: 6px;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0; /* Начальная непрозрачность */
+		animation: fadeIn 0.5s forwards;
+	}
+
+	&::after {
+		content: '';
+		transform: rotate(180deg);
+		position: absolute;
+		bottom: -18px;
+		left: 15px;
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent; /* Размер основания треугольника */
+		border-right: 5px solid transparent; /* Размер основания треугольника */
+		border-top: 10px solid var(--svetlyy);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0; /* Начальная непрозрачность */
+	}
+	to {
+		opacity: 1; /* Конечная непрозрачность */
+	}
+}

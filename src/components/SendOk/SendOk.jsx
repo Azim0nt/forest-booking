@@ -2,11 +2,12 @@ import './SendOk.scss'
 import React from 'react'
 import logo from '/icons/logo.svg'
 import Icon from '../Icon/Icon'
+import Overlay from '../Overlay/Overlay'
 
 const SendOk = ({ send }) => {
 	return (
 		<>
-			<div className='send-ok-overlay' />
+			<Overlay />
 			<div className='send-ok'>
 				<a className='logo' href='/'>
 					<img src={logo} alt='logo' />

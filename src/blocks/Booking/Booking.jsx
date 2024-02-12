@@ -1,59 +1,47 @@
-import { useForm, Controller } from 'react-hook-form'
-import { DatePicker, Button } from 'antd'
-import { useState } from 'react'
-import ruRU from 'antd/lib/locale/ru_RU'
-import moment from 'moment'
-import 'moment/locale/ru'
+import { useForm } from 'react-hook-form'
+import { useState, useEffect, useMemo } from 'react'
+import axios from 'axios'
+import {
+	addDays,
+	differenceInDays,
+	format,
+	isSameDay,
+	isWithinInterval,
+} from 'date-fns'
+import ru from 'date-fns/locale/ru'
+import dynamic from 'next/dynamic'
+import Overlay from '../../components/Overlay/Overlay'
 import './Booking.scss'
+import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from '../DatePicker/DatePicker'
 
-const { RangePicker } = DatePicker
-
-moment.locale('ru')
+const DynamicDatePicker = dynamic(() => import('react-datepicker'), {
+	ssr: false,
+})
 
 const Booking = () => {
 	const {
 		control,
-		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
 
-	// State for selected dates
-	const [selectedDates, setSelectedDates] = useState(null)
+	const [openCalendar, setOpenCalendar] = useState(false)
 
-	const onSubmit = data => {
-		// Преобразуйте выбранные даты в формат YYYY-MM-DD перед отправкой
-		const formattedDates =
-			selectedDates && selectedDates.map(date => date.format('YYYY-MM-DD'))
-		const formData = { ...data, selectedDates: formattedDates }
-		console.log(formData)
-
-		// Ваша текущая логика отправки формы
+	const [startDate, setStartDate] = useState(new Date())
+	const [endDate, setEndDate] = useState(null)
+	const onChange = dates => {
+		const [start, end] = dates
+		setStartDate(start)
+		setEndDate(end)
 	}
 
-	const disabledDate = current => {
-		// Запрет выбора прошедших дат
-		return current && current < moment().startOf('day')
-	}
-
-	const onCalendarChange = value => {
-		// Обновляем выбранные даты при изменении календаря
-		setSelectedDates(value)
-	}
-
-	const onOpenChange = open => {
-		// Сбрасываем выбранные даты при открытии или закрытии календаря
-		if (open) {
-			setSelectedDates([null, null])
-		}
-	}
-
-	const handleClearDates = () => {
-		setSelectedDates([null, null])
-	}
+	const onSubmit = data => {}
 
 	return (
 		<div className='booking'>
+			{openCalendar && <DatePicker />}
+			{openCalendar && <Overlay onClick={() => setOpenCalendar(false)} />}
 			<div className='container'>
 				<div className='booking__wrapper'>
 					<div className='booking__bg'>
@@ -71,46 +59,11 @@ const Booking = () => {
 						</svg>
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<Controller
-							name='selectedDates'
-							control={control}
-							defaultValue={null}
-							render={({ field }) => (
-								<RangePicker
-									{...field}
-									disabledDate={disabledDate}
-									onCalendarChange={onCalendarChange}
-									onOpenChange={onOpenChange}
-									onChange={value => {
-										field.onChange(value)
-										onCalendarChange(value)
-									}}
-									value={selectedDates}
-									allowClear
-									format='YYYY-MM-DD'
-									locale={ruRU}
-									renderExtraFooter={() => (
-										<Button type='link' onClick={handleClearDates}>
-											Очистить даты
-										</Button>
-									)}
-								/>
-							)}
-						/>
 						<input
-							{...register('firstName', { required: true })}
-							aria-invalid={errors.firstName ? 'true' : 'false'}
+							onClick={() => setOpenCalendar(!openCalendar)}
+							className='booking__input-date'
+							type='text'
 						/>
-						{errors.firstName?.type === 'required' && (
-							<p role='alert'>Имя обязательно</p>
-						)}
-
-						<input
-							{...register('mail', { required: 'Email обязателен' })}
-							aria-invalid={errors.mail ? 'true' : 'false'}
-						/>
-						{errors.mail && <p role='alert'>{errors.mail?.message}</p>}
-
 						<input type='submit' />
 					</form>
 				</div>

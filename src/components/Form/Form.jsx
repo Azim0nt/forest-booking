@@ -14,14 +14,48 @@ import SendOk from '../SendOk/SendOk'
 const Form = () => {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [isErrorSubmitted, setIsErrorSubmitted] = useState(false)
+	const [addNameClass, setAddNameClass] = useState('')
+	const [addPhoneClass, setAddPhoneClass] = useState('')
+	const [addTextAreaClass, setAddTextAreaClass] = useState('')
+	const [selectedOption, setSelectedOption] = useState('#afafaf !important')
+	const [showPhoneMask, setShowPhoneMask] = useState(false)
 
+	const selectClass = () => {
+		setSelectedOption('#f7fdfb !important')
+	}
+
+	const handleNameClassChange = () => {
+		setAddNameClass('input-form-ok')
+	}
+
+	const removeNameClassChange = () => {
+		setAddNameClass('')
+	}
+
+	const handlePhoneClassChange = () => {
+		setAddPhoneClass('input-form-ok')
+	}
+
+	const removePhoneClassChange = () => {
+		setAddPhoneClass('')
+	}
+
+	const handleTextAreaClassChange = () => {
+		setAddTextAreaClass('textarea-form-ok')
+	}
+
+	const removeTextAreaClassChange = () => {
+		setAddTextAreaClass('')
+	}
+
+	const [showMask, setShowMask] = useState(false)
 	//отправка данных
 	const onSubmit = async data => {
 		console.log('Сообщение успешно отправлено в телеграм-канал')
 		setIsSubmitted(true)
 		setTimeout(() => {
 			setIsSubmitted(false)
-		}, 2000)
+		}, 4000)
 		// try {
 		// 	const response = await fetch(
 		// 		`https://api.telegram.org/bot${
@@ -61,7 +95,7 @@ const Form = () => {
 	const schema = yup
 		.object()
 		.shape({
-			firstName: yup.string().required('Обязательно для ввода').max(20),
+			firstName: yup.string().required('Обязательно для ввода').max(20).min(2),
 			phone: yup
 				.string()
 				.matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, 'Неверно введен номер')
@@ -81,6 +115,7 @@ const Form = () => {
 		handleSubmit,
 		formState: { errors },
 		register,
+		watch,
 	} = useForm({
 		defaultValues: {
 			firstName: '',
@@ -108,7 +143,14 @@ const Form = () => {
 						{...register('firstName')}
 						aria-invalid={errors.firstName ? 'true' : 'false'}
 						placeholder='Имя*'
-						className='input-form'
+						className={`input-form ${addNameClass}`}
+						onFocus={
+							errors.firstName ? removeNameClassChange : handleNameClassChange
+						}
+						onBlur={
+							errors.firstName ? removeNameClassChange : handleNameClassChange
+						}
+						// onChange={errors.firstName ? removeClassChange : handleClassChange}
 					/>
 					{errors.firstName && (
 						<img className='error-icon' src={errorImage} alt='error' />
@@ -121,7 +163,7 @@ const Form = () => {
 					render={({ field }) => (
 						<div className='input__wrapper'>
 							<IMaskInput
-								mask='+{7} (000) 000-00-00'
+								mask={showPhoneMask ? '+{7} (000) 000-00-00' : ''}
 								definitions={{
 									0: /[0-9]/,
 								}}
@@ -134,7 +176,19 @@ const Form = () => {
 										input.focus()
 									}
 								}}
-								className='input-form'
+								className={`input-form ${addPhoneClass}`}
+								onFocus={() => {
+									setShowPhoneMask(true)
+									errors.phone
+										? removePhoneClassChange()
+										: handlePhoneClassChange()
+								}}
+								onBlur={() => {
+									setShowPhoneMask(false)
+									errors.phone
+										? removePhoneClassChange()
+										: handlePhoneClassChange()
+								}}
 								aria-invalid={errors.phone ? 'true' : 'false'}
 							/>
 							{errors.phone ? (
@@ -163,12 +217,13 @@ const Form = () => {
 								instanceId={useId()}
 								className='react-select-container'
 								classNamePrefix={'react-select'}
+								onFocus={selectClass}
 								styles={{
 									control: (baseStyles, { isFocused }) => ({
 										...baseStyles,
 										borderColor: errors.select
 											? '#eb394f !important'
-											: '#afafaf !important',
+											: selectedOption,
 									}),
 									placeholder: (baseStyles, { isFocused }) => ({
 										...baseStyles,
@@ -180,7 +235,7 @@ const Form = () => {
 									dropdownIndicator: provided => ({
 										...provided,
 										svg: {
-											fill: errors.select ? '#eb394f' : '',
+											fill: errors.select ? '#eb394f' : selectedOption,
 										},
 									}),
 								}}
@@ -197,7 +252,17 @@ const Form = () => {
 						{...register('textarea')}
 						aria-invalid={errors.textarea ? 'true' : 'false'}
 						placeholder='Комментарий (необязательное поле)'
-						className='textarea-form'
+						className={`textarea-form ${addTextAreaClass}`}
+						onFocus={
+							errors.textarea
+								? removeTextAreaClassChange
+								: handleTextAreaClassChange
+						}
+						onBlur={
+							errors.textarea
+								? removeTextAreaClassChange
+								: handleTextAreaClassChange
+						}
 					/>
 					{errors.textarea && (
 						<img className='error-icon' src={errorImage} alt='error' />

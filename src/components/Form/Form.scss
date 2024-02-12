@@ -12,8 +12,17 @@ form {
 		width: 100%;
 		height: 56px;
 		background: var(--korichnevyy);
-		color: #afafaf;
+		color: var(--svetlyy);
 		position: relative;
+
+		// &:focus {
+		// 	border: 1px solid var(--svetlyy);
+		// }
+
+		&-ok {
+			border: 1px solid var(--svetlyy);
+			color: var(--svetlyy);
+		}
 	}
 
 	input {
@@ -58,6 +67,11 @@ form {
 		background: var(--korichnevyy);
 		color: #afafaf;
 		resize: none;
+
+		&-ok {
+			border: 1px solid var(--svetlyy);
+			color: var(--svetlyy);
+		}
 
 		&:focus {
 			outline: none;
@@ -172,5 +186,9 @@ form {
 		top: 50%;
 		left: -22px; /* Измените положение по вашему усмотрению */
 		transform: translateY(-50%);
+	}
+
+	.react-select__single-value {
+		color: var(--svetlyy);
 	}
 }

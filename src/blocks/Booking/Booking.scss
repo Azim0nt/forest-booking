@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 392px;
+	height: 407px;
 	.container {
 		height: 100%;
 	}
@@ -14,5 +14,14 @@
 	}
 	&__bg {
 		position: absolute;
+	}
+
+	form {
+		position: relative;
+		z-index: 5;
+		padding: 40px;
+	}
+
+	&__input-date {
 	}
 }

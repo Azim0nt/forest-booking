@@ -32,7 +32,7 @@ const Prices = () => {
 									<ul className='prices__addservices-list'>
 										<li>Банный чан</li>
 										<li>
-											<a href='#'>Дополнительные услуги</a>
+											<a href='#exclusive'>Дополнительные услуги</a>
 										</li>
 									</ul>
 								</div>
