@@ -63,6 +63,7 @@ const Booking = () => {
 							onClick={() => setOpenCalendar(!openCalendar)}
 							className='booking__input-date'
 							type='text'
+							placeholder='Выбор дат'
 						/>
 						<input type='submit' />
 					</form>

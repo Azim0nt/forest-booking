@@ -10,11 +10,10 @@
 		z-index: 7;
 		background: var(--korichnevyy);
 		border-radius: 24px;
-		padding: 80px 40px;
+		padding: 40px 40px;
 		display: flex;
 		gap: 40px;
 		width: 691px;
-		height: 517px;
 		display: flex;
 		flex-direction: column;
 	}
@@ -24,6 +23,84 @@
 		font-weight: 500;
 		font-size: 16px;
 		color: #fff;
+	}
+
+	&__top {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__inputs {
+		display: flex;
+
+		div {
+			display: flex;
+			flex-direction: column;
+
+			label {
+				font-family: var(--font-family);
+				font-weight: 500;
+				font-size: 16px;
+				color: var(--svetlyy);
+			}
+		}
+	}
+
+	&__input {
+		&-end {
+			border: 1px solid var(--seryy);
+			border-radius: 0 16px 16px 0;
+			padding: 8px 16px 8px 40px;
+			width: 164px;
+			height: 58px;
+			display: flex;
+			gap: 4px;
+
+			&:focus-within {
+				border: 1px solid var(--svetlyy);
+			}
+
+			input {
+				background: none;
+				border: none;
+				font-family: var(--font-family);
+				font-weight: 200;
+				font-size: 16px;
+				color: var(--svetlyy);
+				outline: none;
+			}
+		}
+
+		&-start {
+			border: 1px solid var(--seryy);
+			border-radius: 16px;
+			padding: 8px 16px;
+			width: 164px;
+			height: 58px;
+			position: absolute;
+			right: 180px;
+			display: flex;
+			gap: 4px;
+			background: var(--korichnevyy);
+
+			&:focus-within {
+				border: 1px solid var(--svetlyy);
+			}
+
+			input {
+				background: none;
+				border: none;
+				font-family: var(--font-family);
+				font-weight: 200;
+				font-size: 16px;
+				color: var(--svetlyy);
+				outline: none;
+			}
+
+			&:focus {
+				border: 1px solid var(--svetlyy);
+			}
+		}
 	}
 }
 
@@ -102,6 +179,11 @@
 			color: var(--svetlyy);
 		}
 
+		&--in-selecting-range {
+			background: var(--seryy) !important;
+			color: var(--svetlyy);
+		}
+
 		&--range-start {
 			opacity: 1 !important;
 			color: #000;
@@ -110,29 +192,30 @@
 
 		&--range-end {
 			opacity: 1 !important;
-			color: #000;
-			background: var(--svetlyy) !important;
-		}
-
-		&--in-selecting-range {
-			background: var(--seryy) !important;
-			color: var(--svetlyy);
-		}
-
-		&--in-selecting-range {
-			color: var(--svetlyy) !important;
-			// background: var(--svetlyy) !important;
-		}
-
-		&--selecting-range-end {
 			color: #000 !important;
 			background: var(--svetlyy) !important;
 		}
 
-		&--selecting-range-start {
-			color: #000;
-			background: var(--svetlyy) !important;
+		&--keyboard-selected {
+			// color: #000 !important;
+			// background: var(--svetlyy) !important;
+			background: none;
 		}
+
+		// &--in-selecting-range {
+		// 	color: var(--svetlyy) !important;
+		// 	// background: var(--svetlyy) !important;
+		// }
+
+		// &--selecting-range-end {
+		// 	color: #000 !important;
+		// 	background: var(--svetlyy) !important;
+		// }
+
+		// &--selecting-range-start {
+		// 	color: #000;
+		// 	background: var(--svetlyy) !important;
+		// }
 	}
 
 	&__year-text--in-selecting-range {
@@ -143,9 +226,34 @@
 		color: var(--svetlyy) !important;
 		font-size: 33px !important;
 	}
+
+	&__current-month {
+		font-family: var(--font-family);
+		font-weight: 500;
+		font-size: 16px;
+		color: #fff;
+	}
+}
+
+.react-datepicker__day--in-range {
+	position: relative;
+	// &::before {
+	// 	position: absolute;
+	// 	content: '';
+	// 	background-color: var(--seryy);
+	// 	height: 32px;
+	// 	width: 15px;
+	// 	left: -10px;
+	// 	border-radius: 0;
+	// }
+}
+
+.react-datepicker__day--outside-month {
+	opacity: 0 !important;
 }
 
 .react-datepicker__day--range-start {
+	z-index: 1;
 	position: relative;
 	&::before {
 		width: 59px;
@@ -171,56 +279,37 @@
 		opacity: 0; /* Начальная непрозрачность */
 		animation: fadeIn 0.5s forwards;
 	}
-
-	// &::after {
-	// 	content: '';
-	// 	position: absolute;
-	// 	top: -18px;
-	// 	left: 15px;
-	// 	width: 0;
-	// 	height: 0;
-	// 	border-left: 5px solid transparent; /* Размер основания треугольника */
-	// 	border-right: 5px solid transparent; /* Размер основания треугольника */
-	// 	border-top: 10px solid var(--svetlyy);
-	// }
 }
 
 .react-datepicker__day--range-end {
 	position: relative;
-	&::before {
-		width: 59px;
-		height: 20px;
+	&::after {
+		width: 52px;
+		height: 22px;
 		background-color: var(--svetlyy);
 		content: 'День выезда';
 		position: absolute;
-		bottom: -37px;
-		left: 5px;
+		bottom: -28px;
+		left: 0px;
+		background: url('/icons/date-down.svg');
 		font-family: var(--font-family);
 		font-weight: 500;
 		font-size: 8px;
 		color: var(--temno--korichnevyy);
 		border: none;
 		border-radius: 6px;
+		line-height: 165%;
 		padding: 0;
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: center;
 		opacity: 0; /* Начальная непрозрачность */
 		animation: fadeIn 0.5s forwards;
 	}
+}
 
-	&::after {
-		content: '';
-		transform: rotate(180deg);
-		position: absolute;
-		bottom: -18px;
-		left: 15px;
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent; /* Размер основания треугольника */
-		border-right: 5px solid transparent; /* Размер основания треугольника */
-		border-top: 10px solid var(--svetlyy);
-	}
+input::-webkit-calendar-picker-indicator {
+	display: none;
 }
 
 @keyframes fadeIn {
