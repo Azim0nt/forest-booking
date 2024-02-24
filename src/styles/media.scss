@@ -4,11 +4,11 @@
 
 @media (max-width: 1386px) {
 	.container {
-		// max-width: 960px;
-		max-width: 899px;
+		max-width: 960px;
+		//max-width: 899px;
 	}
 }
-@media (max-width: 919px) {
+@media (max-width: 980px) {
 	.container {
 		max-width: 728px;
 	}
@@ -24,4 +24,14 @@
 		width: 100%;
 		padding: 0 10px;
 	}
+}
+
+@media (max-width: 1386px) {
+}
+@media (max-width: 980px) {
+}
+@media (max-width: 748px) {
+}
+
+@media screen and (max-width: 460px) {
 }

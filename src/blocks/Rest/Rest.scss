@@ -1,5 +1,30 @@
 .rest {
+	height: 673px;
 	&__wrapper {
+		// padding-top: 80px;
 		padding-top: 80px;
+		width: 1007px;
+		height: 100%;
+		margin: 0 auto;
+	}
+
+	&__bg {
+		position: absolute;
+	}
+
+	.booking {
+		margin-top: 0;
+	}
+
+	.booking__bg {
+		display: none;
+	}
+
+	.booking__form {
+		row-gap: 56px;
+	}
+
+	.title {
+		padding-left: 40px;
 	}
 }

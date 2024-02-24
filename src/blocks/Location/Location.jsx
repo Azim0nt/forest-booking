@@ -225,7 +225,9 @@ const Location = () => {
 								</div>
 							</div>
 
-							<Button classAdd='location__button'>Забронировать</Button>
+							<Button classAdd='location__button button__green'>
+								Забронировать
+							</Button>
 						</div>
 					</div>
 				</div>

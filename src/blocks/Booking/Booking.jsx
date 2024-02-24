@@ -1,46 +1,170 @@
-import { useForm } from 'react-hook-form'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import axios from 'axios'
-import {
-	addDays,
-	differenceInDays,
-	format,
-	isSameDay,
-	isWithinInterval,
-} from 'date-fns'
+import { parse, format } from 'date-fns'
 import ru from 'date-fns/locale/ru'
 import dynamic from 'next/dynamic'
 import Overlay from '../../components/Overlay/Overlay'
 import './Booking.scss'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from '../DatePicker/DatePicker'
+import Select from 'react-select'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { IMaskInput } from 'react-imask'
+import { useId } from 'react'
+import errorImage from '/icons/error.svg'
+import Icon from '../../components/Icon/Icon'
+import SendOk from '../../components/SendOk/SendOk'
 
 const DynamicDatePicker = dynamic(() => import('react-datepicker'), {
 	ssr: false,
 })
 
 const Booking = () => {
+	const [isSubmitted, setIsSubmitted] = useState(false)
+	const [isErrorSubmitted, setIsErrorSubmitted] = useState(false)
+	const [addNameClass, setAddNameClass] = useState('')
+	const [addSelectClass, setAddSelectClass] = useState('')
+	const [addDateClass, setAddDateClass] = useState('')
+	const [addPhoneClass, setAddPhoneClass] = useState('')
+	const [selectedOption, setSelectedOption] = useState('#afafaf !important')
+	const [showPhoneMask, setShowPhoneMask] = useState(false)
+	const [startDate, setStartDate] = useState('')
+	const [endDate, setEndDate] = useState('')
+	const [startFormattedDate, setStartFormattedDate] = useState('')
+	const [endFormattedDate, setEndFormattedDate] = useState('')
+	const [initialStartDate, setInitialStartDate] = useState('')
+	const [initialEndDate, setInitialEndDate] = useState('')
+
+	const schema = yup
+		.object()
+		.shape({
+			dates: yup.string().required(),
+			firstName: yup.string().required('Обязательно для ввода').max(20).min(2),
+			phone: yup
+				.string()
+				.matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, 'Неверно введен номер')
+				.required('Обязательно для ввода'),
+			select: yup.object().shape({
+				value: yup.string().required('Обязательно для ввода'),
+				label: yup.string(),
+			}),
+		})
+		.required()
+
+	const ref = useRef(null)
+
+	const selectClass = () => {
+		setSelectedOption('#f7fdfb !important')
+	}
+
+	const handleNameClassChange = () => {
+		setAddNameClass('input-form-ok')
+	}
+
+	const removeNameClassChange = () => {
+		setAddNameClass('')
+	}
+
+	const handlePhoneClassChange = () => {
+		setAddPhoneClass('input-form-ok')
+	}
+
+	const removePhoneClassChange = () => {
+		setAddPhoneClass('')
+	}
+
+	const handleDateClassChange = () => {
+		setAddDateClass('input-form-ok')
+	}
+
+	const removeDateClassChange = () => {
+		setAddDateClass('')
+	}
+
 	const {
 		control,
 		handleSubmit,
-		formState: { errors },
-	} = useForm()
+		formState,
+		formState: { errors, isValid },
+		register,
+		watch,
+		setValue,
+		getFieldState,
+		clearErrors,
+	} = useForm({
+		defaultValues: {
+			dates: '',
+			firstName: '',
+			phone: '',
+			select: '', // Добавляем значение по умолчанию для текстовой области
+		},
+		resolver: yupResolver(schema),
+	})
+
+	const handleDatePickerSubmit = data => {
+		setInitialStartDate(data.startDate)
+		setInitialEndDate(data.endDate)
+
+		const startDay = format(data.startDate, 'dd MMM yyyy г.', { locale: ru })
+		const endDay = format(data.endDate, 'dd MMM yyyy г.', { locale: ru })
+
+		setStartFormattedDate(format(data.startDate, 'dd-MM-yyyy'))
+		setEndFormattedDate(format(data.endDate, 'dd-MM-yyyy'))
+
+		setStartDate(startDay)
+		setEndDate(endDay)
+		setValue('dates', `${data.startDate} - ${data.endDate}`)
+
+		setOpenCalendar(false)
+	}
 
 	const [openCalendar, setOpenCalendar] = useState(false)
 
-	const [startDate, setStartDate] = useState(new Date())
-	const [endDate, setEndDate] = useState(null)
-	const onChange = dates => {
-		const [start, end] = dates
-		setStartDate(start)
-		setEndDate(end)
-	}
+	const [hasMounted, setHasMounted] = useState(false)
 
-	const onSubmit = data => {}
+	useEffect(() => {
+		setHasMounted(true)
+	}, [])
+
+	const inputRef = useRef(null)
+
+	// const handleKeyDown = e => {
+	// 	if (e.key === 'Enter') {
+	// 		e.preventDefault()
+	// 	}
+	// }
+
+	const onSubmit = data => {
+		const formattedData = {}
+		Object.keys(data).map(key => {
+			if (key === 'dates') {
+				formattedData.startDay = startFormattedDate
+				formattedData.endDay = endFormattedDate
+			} else if (key === 'select') {
+				formattedData.guests = data.select.value
+			} else {
+				formattedData[key] = data[key]
+			}
+		})
+
+		console.log(formattedData)
+
+		setIsSubmitted(true)
+		setTimeout(() => {
+			setIsSubmitted(false)
+		}, 4000)
+	}
 
 	return (
 		<div className='booking'>
-			{openCalendar && <DatePicker />}
+			{openCalendar && (
+				<DatePicker
+					onSubmitCallback={handleDatePickerSubmit}
+					initialDates={{ initialStartDate, initialEndDate }}
+				/>
+			)}
 			{openCalendar && <Overlay onClick={() => setOpenCalendar(false)} />}
 			<div className='container'>
 				<div className='booking__wrapper'>
@@ -58,15 +182,214 @@ const Booking = () => {
 							/>
 						</svg>
 					</div>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<input
-							onClick={() => setOpenCalendar(!openCalendar)}
-							className='booking__input-date'
-							type='text'
-							placeholder='Выбор дат'
-						/>
-						<input type='submit' />
-					</form>
+					{hasMounted && (
+						<form
+							className='booking__form'
+							onSubmit={handleSubmit(onSubmit)}
+							// onKeyDown={openCalendar ? handleKeyDown : null}
+						>
+							<div className='input__wrapper booking__input-wrapper'>
+								<input
+									{...register('dates')}
+									aria-invalid={errors.dates ? 'true' : 'false'}
+									placeholder='Даты пребывания'
+									className={`input-form ${addDateClass}`}
+									onFocus={
+										errors.dates ? removeDateClassChange : handleDateClassChange
+									}
+									onBlur={
+										errors.dates ? removeDateClassChange : handleDateClassChange
+									}
+									onClick={() => {
+										// setError('dates', false) // Сброс ошибки
+										clearErrors('dates')
+										errors.dates
+											? removeDateClassChange()
+											: handleDateClassChange()
+										setOpenCalendar(!openCalendar)
+									}}
+									onChange={event => {
+										setValue('dates', event.target.value) // Обновляем значение в контролируемом компоненте react-hook-form
+										if (errors.dates) {
+											removeDateClassChange()
+										} else {
+											handleDateClassChange()
+										}
+									}}
+									value={
+										startDate && endDate ? `${startDate} - ${endDate}` : ''
+									}
+									autoComplete='off'
+								/>
+								<div className='booking__input-arrow'>
+									<svg
+										height='20'
+										width='20'
+										viewBox='0 0 20 20'
+										aria-hidden='true'
+										focusable='false'
+										fill='#afafaf'
+									>
+										<path d='M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z'></path>
+									</svg>
+								</div>
+								{errors.dates && (
+									<img className='error-icon' src={errorImage} alt='error' />
+								)}
+							</div>
+							<Controller
+								name='select'
+								control={control}
+								render={({ field }) => (
+									<div className='input__wrapper booking__input-wrapper'>
+										<Select
+											{...field}
+											options={[
+												{ value: '1', label: '1' },
+												{ value: '2', label: '2' },
+												{ value: '3', label: '3' },
+												{ value: '4', label: '4' },
+												{ value: '5', label: '5' },
+												{ value: '6', label: '6' },
+												{ value: '7', label: '7' },
+												{ value: '8', label: '8' },
+												{ value: '9', label: '9' },
+												{ value: '10', label: '10' },
+											]}
+											placeholder='Количество гостей'
+											instanceId={useId()}
+											className='react-select-container'
+											classNamePrefix={'react-select'}
+											onFocus={selectClass}
+											styles={{
+												control: (baseStyles, { isFocused }) => ({
+													...baseStyles,
+													borderColor: errors.select
+														? '#eb394f !important'
+														: selectedOption,
+												}),
+												placeholder: (baseStyles, { isFocused }) => ({
+													...baseStyles,
+													color: errors.select
+														? '#eb394f !important'
+														: '#afafaf !important',
+													opacity: errors.select ? '1' : '0.5',
+												}),
+												dropdownIndicator: provided => ({
+													...provided,
+													svg: {
+														fill: errors.select ? '#eb394f' : selectedOption,
+													},
+												}),
+											}}
+										/>
+										{errors.select && (
+											<img
+												className='error-icon'
+												src={errorImage}
+												alt='error'
+											/>
+										)}
+									</div>
+								)}
+							/>
+
+							<div className='input__wrapper booking__input-wrapper'>
+								<input
+									{...register('firstName')}
+									aria-invalid={errors.firstName ? 'true' : 'false'}
+									placeholder='Имя*'
+									className={`input-form ${addNameClass}`}
+									onFocus={
+										errors.firstName
+											? removeNameClassChange
+											: handleNameClassChange
+									}
+									onBlur={
+										errors.firstName
+											? removeNameClassChange
+											: handleNameClassChange
+									}
+									// onChange={
+									// 	errors.firstName
+									// 		? removeNameClassChange
+									// 		: handleNameClassChange
+									// }
+								/>
+								{errors.firstName && (
+									<img className='error-icon' src={errorImage} alt='error' />
+								)}
+							</div>
+
+							<Controller
+								name='phone'
+								control={control}
+								render={({ field }) => (
+									<div className='input__wrapper booking__input-wrapper'>
+										<IMaskInput
+											mask={showPhoneMask ? '+{7} (000) 000-00-00' : ''}
+											definitions={{
+												0: /[0-9]/,
+											}}
+											placeholder='Телефон*'
+											value={field.value}
+											onAccept={value => field.onChange(value)}
+											inputRef={input => {
+												field.ref(input)
+												if (errors.phone) {
+													input.focus()
+												}
+											}}
+											className={`input-form ${addPhoneClass}`}
+											onFocus={() => {
+												setShowPhoneMask(true)
+												errors.phone
+													? removePhoneClassChange()
+													: handlePhoneClassChange()
+											}}
+											onBlur={() => {
+												setShowPhoneMask(false)
+												errors.phone
+													? removePhoneClassChange()
+													: handlePhoneClassChange()
+											}}
+											aria-invalid={errors.phone ? 'true' : 'false'}
+										/>
+										{errors.phone ? (
+											<img
+												className='error-icon'
+												src={errorImage}
+												alt='error'
+											/>
+										) : (
+											<img />
+										)}
+									</div>
+								)}
+							/>
+
+							{isValid && (
+								<div className='booking__price'>
+									Сумма предоплаты: <p> 30 000 ₽</p>
+								</div>
+							)}
+
+							<button className='button'>Забронировать</button>
+
+							<div className='booking__socials'>
+								<p className='booking__socials-text'>
+									Или свяжитесь с нами прямо сейчас!
+								</p>
+								<div className='booking__socials-items'>
+									{Icon('phone')}
+									{Icon('tg')}
+									{Icon('wa')}
+								</div>
+							</div>
+							{isSubmitted && <SendOk send={true} />}
+							{isErrorSubmitted && <SendOk send={false} />}
+						</form>
+					)}
 				</div>
 			</div>
 		</div>

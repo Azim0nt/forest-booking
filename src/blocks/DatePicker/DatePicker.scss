@@ -55,6 +55,7 @@
 			height: 58px;
 			display: flex;
 			gap: 4px;
+			position: relative;
 
 			&:focus-within {
 				border: 1px solid var(--svetlyy);
@@ -82,6 +83,7 @@
 			display: flex;
 			gap: 4px;
 			background: var(--korichnevyy);
+			z-index: 5;
 
 			&:focus-within {
 				border: 1px solid var(--svetlyy);
@@ -102,6 +104,71 @@
 			}
 		}
 	}
+
+	&__bottom {
+		display: flex;
+		align-self: flex-end;
+		gap: 38px;
+		align-items: center;
+	}
+
+	&__clear {
+		font-family: var(--font-family);
+		font-weight: 400;
+		font-size: 16px;
+		text-decoration: underline;
+		text-decoration-skip-ink: none;
+		color: var(--svetlyy);
+		cursor: pointer;
+	}
+
+	&__period {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		gap: 8px;
+	}
+
+	&__dates {
+		font-family: var(--font-family);
+		font-weight: 200;
+		font-size: 16px;
+		color: #fff;
+	}
+}
+
+.date-picker__input-end:has(.date-picker__input[aria-invalid='true']) {
+	border: solid 1px #eb394f;
+	label {
+		color: #eb394f;
+	}
+}
+
+.date-picker__input[aria-invalid='true'] {
+	&::placeholder {
+		color: var(--seryy) !important;
+	}
+}
+
+.date-picker__input-start:has(.date-picker__input[aria-invalid='true']) {
+	border: solid 1px #eb394f;
+	label {
+		color: #eb394f;
+	}
+}
+
+.date-picker__error-start {
+	top: inherit !important;
+	left: 0 !important;
+	transform: none !important;
+	bottom: -24px !important;
+}
+
+.date-picker__error-end {
+	top: inherit;
+	left: 0;
+	transform: none;
+	bottom: -24px;
 }
 
 .react-datepicker {

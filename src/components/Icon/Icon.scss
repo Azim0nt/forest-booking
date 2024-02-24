@@ -120,3 +120,24 @@
 	align-items: center;
 	gap: 24px;
 }
+
+@media (max-width: 980px) {
+	.social {
+		width: 56px;
+		height: 56px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		img {
+			width: 24px;
+			height: 24px;
+		}
+
+		&-vk {
+			img {
+				width: 34px;
+				height: 100%;
+			}
+		}
+	}
+}

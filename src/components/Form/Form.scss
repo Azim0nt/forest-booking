@@ -22,6 +22,18 @@ form {
 		&-ok {
 			border: 1px solid var(--svetlyy);
 			color: var(--svetlyy);
+
+			+ div.booking__input-arrow {
+				svg {
+					fill: var(--svetlyy);
+				}
+			}
+
+			+ div.booking__input-arrow {
+				svg {
+					fill: var(--svetlyy);
+				}
+			}
 		}
 	}
 
@@ -33,6 +45,12 @@ form {
 			&::placeholder {
 				color: var(--krasnyy-oshibka);
 				opacity: 1;
+			}
+
+			+ div.booking__input-arrow {
+				svg {
+					fill: var(--krasnyy-oshibka);
+				}
 			}
 		}
 	}
@@ -191,4 +209,25 @@ form {
 	.react-select__single-value {
 		color: var(--svetlyy);
 	}
+}
+
+@media (max-width: 1386px) {
+}
+@media (max-width: 980px) {
+}
+@media (max-width: 748px) {
+	.input__wrapper:has(input[aria-invalid='true']) {
+		// margin-left: 20px;
+	}
+
+	.react-select__indicator {
+		padding: 0;
+	}
+
+	.error-icon {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 460px) {
 }

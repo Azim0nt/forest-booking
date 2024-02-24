@@ -28,16 +28,27 @@ ul {
 	list-style-type: none;
 }
 
-.overlay {
+/* .overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 998;
-}
+	z-index: 20;
+} */
 
 html {
 	scroll-behavior: smooth; /* Делает прокрутку плавной */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	box-shadow: 0 0 0 30px #3b3b3b inset !important;
+}
+
+input:-webkit-autofill {
+	-webkit-text-fill-color: var(--svetlyy) !important;
 }

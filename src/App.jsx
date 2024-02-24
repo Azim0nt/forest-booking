@@ -43,12 +43,12 @@ function App() {
 			<Atmosphere />
 			<Cosiness />
 			<Prices />
-			<Rest />
-			<Sale />
-			<Location />
+			{/* <Rest /> */}
+			{/* <Sale /> */}
+			{/* <Location /> */}
 			<Exclusive />
-			<Questions />
-			<Footer />
+			{/*<Questions />
+			<Footer /> */}
 		</>
 	)
 }

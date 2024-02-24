@@ -120,7 +120,7 @@ const Form = () => {
 		defaultValues: {
 			firstName: '',
 			phone: '',
-			textarea: '', // Добавляем значение по умолчанию для текстовой области
+			guests: '', // Добавляем значение по умолчанию для текстовой области
 		},
 		resolver: yupResolver(schema),
 	})

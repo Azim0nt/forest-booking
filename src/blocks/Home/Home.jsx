@@ -11,26 +11,11 @@ const Home = () => {
 		<>
 			<div className='home' id='home'>
 				<div className='container'>
+					<div className='home__bg'></div>
 					<div className='home__wrapper'>
-						<div className='home__bg'>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								width='1366'
-								height='902'
-								viewBox='0 0 1366 902'
-								fill='none'
-							>
-								<path
-									d='M0 24C0 10.7452 10.7452 0 24 0H759C772.255 0 783 10.7452 783 24V134C783 147.255 793.745 158 807 158H1342C1355.25 158 1366 168.745 1366 182V822V878C1366 891.255 1355.25 902 1342 902H928C914.745 902 904 891.255 904 878V808C904 794.745 893.255 784 880 784H24C10.7452 784 0 773.255 0 760V24Z'
-									fill='#F7FDFB'
-								/>
-							</svg>
-						</div>
+						<Title classAdd='title_black'>Что предлагает наш уютный дом:</Title>
 						<div className='home__block'>
 							<div className='home__description'>
-								<Title classAdd='title_black'>
-									Что предлагает наш уютный дом:
-								</Title>
 								<div className='home__icons'>
 									<div className='home__icon'>
 										<div className='home__icon-photo'>
@@ -69,19 +54,28 @@ const Home = () => {
 									парковки делает пребывание удобным для всех гостей.
 									<br />
 									<br />
-									Изысканная терраса площадью 60 м2 предлагает просторное
-									пространство для отдыха. Здесь вы обнаружите уютный 4-метровый
-									стол, идеальное место для семейных ужинов или вечерних
-									посиделок с друзьями.
+									<p className='home__text-1'>
+										Изысканная терраса площадью 60 м2 предлагает просторное
+										пространство для отдыха. Здесь вы обнаружите уютный
+										4- метровый стол, идеальное место для семейных
+										ужинов или вечерних посиделок с друзьями.
+									</p>
 									<br />
-									<br />
-									Гриль-зона и банный чан добавляют шарма, создавая атмосферу
-									праздника на природе.
+									<p className='home__text-2'>
+										Гриль-зона и банный чан добавляют шарма, создавая атмосферу
+										праздника на природе.
+									</p>
 								</p>
 							</div>
 							<div className='home__active-photo'>
 								<div className='home__top'>
-									<img src={activePhoto} alt='slide' />
+									<img
+										onClick={() =>
+											setActivePhoto(activePhoto === photo1 ? photo2 : photo1)
+										}
+										src={activePhoto}
+										alt='slide'
+									/>
 								</div>
 								<div className='home__bottom'>
 									<div className='home__images'>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Rest.scss'
 import '../../App.css'
+import Booking from '../Booking/Booking'
 
 function Rest() {
 	const [count, setCount] = useState(0)
@@ -42,7 +43,10 @@ function Rest() {
 							/>
 						</svg>
 					</div>
-					<div className='rest__wrapper'></div>
+					<div className='rest__wrapper'>
+						<h2 className='title'>Забронируйте свой отдых</h2>
+						<Booking />
+					</div>
 				</div>
 			</div>
 		</>

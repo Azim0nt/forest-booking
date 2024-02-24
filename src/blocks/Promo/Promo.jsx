@@ -45,7 +45,7 @@ const Promo = () => {
 						<div className='promo__relaxation'>
 							<h1 className='title'>Отдых в объятиях природы</h1>
 							<Subtitle addClass='promo__subtitle'>
-								уютный уголок для спокойного отдыха рядом с Екатеринбургом
+								уютный уголок для спокойного отдыха рядом с Екатеринбургом
 							</Subtitle>
 							<div className='promo__texts'>
 								<p className='text promo__text'>
@@ -139,7 +139,17 @@ const Promo = () => {
 									clickable: true,
 								}}
 								scrollbar={false}
-								direction='vertical'
+								breakpoints={{
+									1366: {
+										spaceBetween: 50,
+										slidesPerView: 1,
+										direction: 'vertical',
+									},
+									// 980: {
+									// 	direction: 'horizontal',
+									// },
+								}}
+								// direction='horizontal'
 								navigation={{
 									nextEl: '.custom-next-button',
 									prevEl: '.custom-prev-button',
