@@ -39,20 +39,7 @@ const Location = () => {
 		<>
 			<div className='location' id='location'>
 				<div className='container'>
-					<div className='location__bg'>
-						<svg
-							width='1366'
-							height='1578'
-							viewBox='0 0 1366 1578'
-							fill='none'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<path
-								d='M0 24C0 10.7452 10.7452 0 24 0H757C770.255 0 781 10.7452 781 24V194C781 207.255 791.745 218 805 218H1342C1355.25 218 1366 228.745 1366 242V1554C1366 1567.25 1355.25 1578 1342 1578H24C10.7452 1578 0 1567.25 0 1554V24Z'
-								fill='#2C3B2E'
-							/>
-						</svg>
-					</div>
+					<div className='location__bg'></div>
 					<div className='location__wrapper'>
 						<Title>Уникальная локация</Title>
 						<p className='location__description'>
@@ -123,7 +110,7 @@ const Location = () => {
 						<p className='location__items-text'>
 							Эти уникальные особенности локации делают это место идеальным для
 							тех, кто ищет уединение, природную красоту и возможность
-							насладиться чистотой и спокойствием загородной жизни.
+							насладиться чистотой и спокойствием загородной жизни.
 						</p>
 
 						<div className='location__found' id='location__found'>
@@ -225,7 +212,10 @@ const Location = () => {
 								</div>
 							</div>
 
-							<Button classAdd='location__button button__green'>
+							<Button
+								classAdd='location__button button__green'
+								onClick={() => scrollToTarget('questions')}
+							>
 								Забронировать
 							</Button>
 						</div>

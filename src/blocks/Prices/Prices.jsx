@@ -169,7 +169,7 @@ const Prices = () => {
 									<li>
 										<img src={notImage} alt='not' />
 										<p>
-											У нас в доме не курят. Штраф <span> 10 000 ₽</span>
+											У нас в доме не курят. Штраф <strong>10 000 ₽</strong>
 										</p>
 									</li>
 									<li>

@@ -46,7 +46,7 @@ function Icon(props) {
 			)}
 
 			{props === 'mail' && (
-				<a href='#' className='social social-mail'>
+				<a href='mailto:vremya.lesa@mail.ru' className='social social-mail'>
 					<img src={mail} alt='mail' />
 				</a>
 			)}
@@ -70,7 +70,7 @@ function Icon(props) {
 			)}
 
 			{props === 'phone-footer' && (
-				<a href='#' className='social social-phone'>
+				<a href='tel:+79226152393' className='social social-phone'>
 					<img src={phoneFooter} alt='phone' />
 				</a>
 			)}

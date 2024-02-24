@@ -6,7 +6,7 @@ import './Questions.scss'
 const Questions = () => {
 	return (
 		<>
-			<div className='questions'>
+			<div className='questions' id='questions'>
 				<div className='container'>
 					<div className='questions__wrapper'>
 						<div className='questions__left'>

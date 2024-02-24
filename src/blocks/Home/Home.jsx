@@ -42,7 +42,7 @@ const Home = () => {
 										<p className='home__icon-text'>Банный чан</p>
 									</div>
 								</div>
-								<p className='home__text'>
+								<div className='home__text'>
 									Погружение в уникальный мир комфорта и роскоши – наш
 									загородный дом, где каждый момент пропитан неповторимой
 									гармонией.
@@ -65,7 +65,7 @@ const Home = () => {
 										Гриль-зона и банный чан добавляют шарма, создавая атмосферу
 										праздника на природе.
 									</p>
-								</p>
+								</div>
 							</div>
 							<div className='home__active-photo'>
 								<div className='home__top'>

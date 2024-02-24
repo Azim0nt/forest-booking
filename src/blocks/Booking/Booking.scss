@@ -124,6 +124,7 @@
 
 @media (max-width: 980px) {
 	.booking {
+		position: relative;
 		height: auto;
 		&__bg {
 			height: 100%;
@@ -156,6 +157,13 @@
 			}
 		}
 
+		&__price {
+			position: absolute;
+			bottom: -240px;
+			right: 40px;
+			width: 200px;
+		}
+
 		.button {
 			grid-row: 3/4;
 			grid-column: 2/3;
@@ -186,6 +194,11 @@
 			grid-template-columns: 1fr;
 			gap: 20px;
 			width: 440px;
+		}
+
+		&__price {
+			bottom: -281px;
+			right: 20px;
 		}
 
 		&__input-wrapper {
@@ -240,6 +253,10 @@
 
 		&__socials {
 			width: 100%;
+		}
+
+		&__price {
+			display: none;
 		}
 	}
 }

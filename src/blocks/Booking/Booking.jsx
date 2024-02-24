@@ -136,7 +136,7 @@ const Booking = () => {
 	// 	}
 	// }
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
 		const formattedData = {}
 		Object.keys(data).map(key => {
 			if (key === 'dates') {
@@ -151,10 +151,40 @@ const Booking = () => {
 
 		console.log(formattedData)
 
-		setIsSubmitted(true)
-		setTimeout(() => {
-			setIsSubmitted(false)
-		}, 4000)
+		try {
+			const response = await fetch(
+				`https://api.telegram.org/bot${
+					import.meta.env.VITE_TELEGRAM_TOKEN
+				}/sendMessage`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						chat_id: import.meta.env.VITE_CHAT_ID, // Идентификатор чата или канала
+						text: `Новое сообщение из формы:\nИмя: ${formattedData.firstName}\nТелефон: ${formattedData.phone}\nКоличество людей: ${formattedData.guests}\nДата заезда: ${formattedData.startDay}\nДата выезда: ${formattedData.endDay}`,
+					}),
+				}
+			)
+
+			if (!response.ok) {
+				throw new Error('Ошибка отправки сообщения')
+			}
+
+			// Обработка успешной отправки сообщения
+			console.log('Сообщение успешно отправлено в телеграм-канал')
+			setIsSubmitted(true)
+			setTimeout(() => {
+				setIsSubmitted(false)
+			}, 4000) // 120000 миллисекунд = 2 минуты
+		} catch (error) {
+			console.error('Ошибка отправки сообщения:', error)
+			setIsErrorSubmitted(true)
+			setTimeout(() => {
+				setIsErrorSubmitted(false)
+			}, 4000)
+		}
 	}
 
 	return (
@@ -370,7 +400,7 @@ const Booking = () => {
 
 							{isValid && (
 								<div className='booking__price'>
-									Сумма предоплаты: <p> 30 000 ₽</p>
+									Сумма предоплаты: <p>30 000 ₽</p>
 								</div>
 							)}
 

@@ -355,6 +355,9 @@
 			width: 90%;
 			flex-direction: column;
 			height: 357px;
+			border-radius: 12px;
+
+			background-position: -20px;
 
 			&.active {
 				left: 50%;

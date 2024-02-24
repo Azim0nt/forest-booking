@@ -19,22 +19,37 @@ function Header() {
 					<nav className={`menu-768 ${showMenuBurger}`}>
 						<ul>
 							<li>
-								<a href='#home'>О доме</a>
+								<a href='#home' onClick={() => setShowMenuBurger('')}>
+									О доме
+								</a>
 							</li>
 							<li>
-								<a href='#prices'>Цена</a>
+								<a href='#prices' onClick={() => setShowMenuBurger('')}>
+									Цена
+								</a>
 							</li>
 							<li>
-								<a href='#location'>О локации</a>
+								<a href='#location' onClick={() => setShowMenuBurger('')}>
+									О локации
+								</a>
 							</li>
 							<li>
-								<a href='#location__found'>Как добраться</a>
+								<a
+									href='#location__found'
+									onClick={() => setShowMenuBurger('')}
+								>
+									Как добраться
+								</a>
 							</li>
 							<li>
-								<a href='#exclusive'>Дополнительные услуги</a>
+								<a href='#exclusive' onClick={() => setShowMenuBurger('')}>
+									Дополнительные услуги
+								</a>
 							</li>
 							<li>
-								<a href='#footer'>Контакты</a>
+								<a href='#footer' onClick={() => setShowMenuBurger('')}>
+									Контакты
+								</a>
 							</li>
 						</ul>
 						<div className='menu-768__right'>

@@ -47,3 +47,45 @@
 		}
 	}
 }
+
+@media (max-width: 1386px) {
+	.send-ok {
+		width: 918px;
+	}
+}
+@media (max-width: 980px) {
+	.send-ok {
+		width: 728px;
+	}
+}
+@media (max-width: 748px) {
+	.send-ok {
+		width: 480px;
+		flex-direction: column;
+		padding: 40px 20px;
+
+		.logo {
+			align-self: center;
+		}
+
+		&__descriptions {
+			&-title {
+				font-family: var(--font-family);
+				font-weight: 600;
+				font-size: 20px;
+				color: var(--svetlyy);
+				text-transform: none;
+			}
+
+			&-text {
+				font-size: 16px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 460px) {
+	.send-ok {
+		width: 90%;
+	}
+}
