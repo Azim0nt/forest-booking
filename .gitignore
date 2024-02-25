@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 .env
+.DS_Store
+public/.DS_Store
+src/.DS_Store
+
 
 # Editor directories and files
 .vscode/*

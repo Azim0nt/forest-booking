@@ -27,6 +27,13 @@ const Location = () => {
 		event.stopPropagation()
 	}
 
+	const scrollToTarget = id => {
+		const element = document.getElementById(id)
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+		}
+	}
+
 	const [messageApi, contextHolder] = message.useMessage()
 
 	const success = () => {
@@ -212,12 +219,12 @@ const Location = () => {
 								</div>
 							</div>
 
-							<Button
-								classAdd='location__button button__green'
+							<a
+								className='button location__button button__green'
 								onClick={() => scrollToTarget('questions')}
 							>
 								Забронировать
-							</Button>
+							</a>
 						</div>
 					</div>
 				</div>
