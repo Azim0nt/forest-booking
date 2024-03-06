@@ -19,6 +19,15 @@ const Form = () => {
 	const [addTextAreaClass, setAddTextAreaClass] = useState('')
 	const [selectedOption, setSelectedOption] = useState('#afafaf !important')
 	const [showPhoneMask, setShowPhoneMask] = useState(false)
+	const [isFocused, setIsFocused] = useState(false)
+
+	const handleFocus = () => {
+		setIsFocused(true)
+	}
+
+	const handleBlur = () => {
+		setIsFocused(false)
+	}
 
 	const selectClass = () => {
 		setSelectedOption('#f7fdfb !important')
@@ -120,6 +129,10 @@ const Form = () => {
 		resolver: yupResolver(schema),
 	})
 
+	const firstNameValue = watch('firstName')
+	const phoneValue = watch('phone')
+	const selectValue = watch('select')
+
 	const [hasMounted, setHasMounted] = useState(false)
 
 	useEffect(() => {
@@ -139,12 +152,14 @@ const Form = () => {
 						aria-invalid={errors.firstName ? 'true' : 'false'}
 						placeholder='Имя*'
 						className={`input-form ${addNameClass}`}
-						onFocus={
-							errors.firstName ? removeNameClassChange : handleNameClassChange
-						}
-						onBlur={
-							errors.firstName ? removeNameClassChange : handleNameClassChange
-						}
+						// onFocus={
+						// 	errors.firstName ? removeNameClassChange : handleNameClassChange
+						// }
+						onBlur={() => {
+							errors.firstName || firstNameValue.length < 2
+								? removeNameClassChange()
+								: handleNameClassChange()
+						}}
 						// onChange={errors.firstName ? removeClassChange : handleClassChange}
 					/>
 					{errors.firstName && (
@@ -162,7 +177,7 @@ const Form = () => {
 								definitions={{
 									0: /[0-9]/,
 								}}
-								placeholder='Телефон*'
+								placeholder={isFocused ? '+7 (___) ___-__-__' : 'Телефон*'}
 								value={field.value}
 								onAccept={value => field.onChange(value)}
 								inputRef={input => {
@@ -174,13 +189,15 @@ const Form = () => {
 								className={`input-form ${addPhoneClass}`}
 								onFocus={() => {
 									setShowPhoneMask(true)
-									errors.phone
-										? removePhoneClassChange()
-										: handlePhoneClassChange()
+									handleFocus()
+									// errors.phone
+									// 	? removePhoneClassChange()
+									// 	: handlePhoneClassChange()
 								}}
 								onBlur={() => {
 									setShowPhoneMask(false)
-									errors.phone
+									handleBlur()
+									errors.phone || phoneValue.length < 18
 										? removePhoneClassChange()
 										: handlePhoneClassChange()
 								}}
@@ -212,7 +229,11 @@ const Form = () => {
 								instanceId={useId()}
 								className='react-select-container'
 								classNamePrefix={'react-select'}
-								onFocus={selectClass}
+								onMenuClose={() => {
+									if (field.value && field.value.value) {
+										selectClass()
+									}
+								}}
 								styles={{
 									control: (baseStyles, { isFocused }) => ({
 										...baseStyles,
@@ -248,13 +269,13 @@ const Form = () => {
 						aria-invalid={errors.textarea ? 'true' : 'false'}
 						placeholder='Комментарий (необязательное поле)'
 						className={`textarea-form ${addTextAreaClass}`}
-						onFocus={
-							errors.textarea
-								? removeTextAreaClassChange
-								: handleTextAreaClassChange
-						}
+						// onFocus={
+						// 	errors.textarea
+						// 		? removeTextAreaClassChange
+						// 		: handleTextAreaClassChange
+						// }
 						onBlur={
-							errors.textarea
+							errors.textarea || watch('textarea').length < 1
 								? removeTextAreaClassChange
 								: handleTextAreaClassChange
 						}

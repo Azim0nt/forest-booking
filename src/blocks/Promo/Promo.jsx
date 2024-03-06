@@ -9,7 +9,13 @@ import arrow from '/icons/arrow-up-right.svg'
 import { message } from 'antd'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
+import {
+	Navigation,
+	Pagination,
+	Scrollbar,
+	A11y,
+	Autoplay,
+} from 'swiper/modules'
 import 'swiper/css/bundle'
 
 const Promo = () => {
@@ -132,12 +138,13 @@ const Promo = () => {
 							</div>
 							<Swiper
 								// install Swiper modules
-								modules={[Navigation, Pagination, Scrollbar, A11y]}
+								modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
 								spaceBetween={50}
 								slidesPerView={1}
 								pagination={{
 									clickable: true,
 								}}
+								autoplay={{ delay: 5000 }}
 								scrollbar={false}
 								breakpoints={{
 									1366: {

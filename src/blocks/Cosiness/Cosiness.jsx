@@ -175,8 +175,9 @@ const Cosiness = () => {
 							<video
 								className='video-player'
 								ref={videoRef}
-								controls
+								// controls={false}
 								onEnded={handleVideoEnded}
+								onClick={handleTogglePlay}
 							>
 								<source src='video/forest_time.mov' type='video/mp4' />
 								Your browser does not support the video tag.

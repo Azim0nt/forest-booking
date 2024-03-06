@@ -36,6 +36,15 @@ const Booking = () => {
 	const [endFormattedDate, setEndFormattedDate] = useState('')
 	const [initialStartDate, setInitialStartDate] = useState('')
 	const [initialEndDate, setInitialEndDate] = useState('')
+	const [isFocused, setIsFocused] = useState(false)
+
+	const handleFocus = () => {
+		setIsFocused(true)
+	}
+
+	const handleBlur = () => {
+		setIsFocused(false)
+	}
 
 	const schema = yup
 		.object()
@@ -103,6 +112,11 @@ const Booking = () => {
 		resolver: yupResolver(schema),
 	})
 
+	const firstNameValue = watch('firstName')
+	const datesValue = watch('dates')
+	const phoneValue = watch('phone')
+	const selectValue = watch('select')
+
 	const handleDatePickerSubmit = data => {
 		setInitialStartDate(data.startDate)
 		setInitialEndDate(data.endDate)
@@ -118,6 +132,8 @@ const Booking = () => {
 		setValue('dates', `${data.startDate} - ${data.endDate}`)
 
 		setOpenCalendar(false)
+
+		handleDateClassChange()
 	}
 
 	const [openCalendar, setOpenCalendar] = useState(false)
@@ -153,9 +169,9 @@ const Booking = () => {
 
 		try {
 			const response = await fetch(
-				`https://api.telegram.org/bot${
-					import.meta.env.VITE_TELEGRAM_TOKEN
-				}/sendMessage`,
+				// `https://api.telegram.org/bot${
+				// 	import.meta.env.VITE_TELEGRAM_TOKEN
+				// }/sendMessage`,
 				{
 					method: 'POST',
 					headers: {
@@ -215,6 +231,7 @@ const Booking = () => {
 					{hasMounted && (
 						<form
 							className='booking__form'
+							id='booking-form'
 							onSubmit={handleSubmit(onSubmit)}
 							// onKeyDown={openCalendar ? handleKeyDown : null}
 						>
@@ -224,12 +241,14 @@ const Booking = () => {
 									aria-invalid={errors.dates ? 'true' : 'false'}
 									placeholder='Даты пребывания'
 									className={`input-form ${addDateClass}`}
-									onFocus={
-										errors.dates ? removeDateClassChange : handleDateClassChange
-									}
-									onBlur={
-										errors.dates ? removeDateClassChange : handleDateClassChange
-									}
+									// onFocus={
+									// 	errors.dates ? removeDateClassChange : handleDateClassChange
+									// }
+									onBlur={() => {
+										errors.dates || !(startDate && endDate)
+											? removeDateClassChange()
+											: handleDateClassChange()
+									}}
 									onClick={() => {
 										// setError('dates', false) // Сброс ошибки
 										clearErrors('dates')
@@ -290,7 +309,9 @@ const Booking = () => {
 											instanceId={useId()}
 											className='react-select-container'
 											classNamePrefix={'react-select'}
-											onFocus={selectClass}
+											onMenuClose={() => {
+												selectValue.value != undefined ? selectClass() : null
+											}}
 											styles={{
 												control: (baseStyles, { isFocused }) => ({
 													...baseStyles,
@@ -330,16 +351,16 @@ const Booking = () => {
 									aria-invalid={errors.firstName ? 'true' : 'false'}
 									placeholder='Имя*'
 									className={`input-form ${addNameClass}`}
-									onFocus={
-										errors.firstName
-											? removeNameClassChange
-											: handleNameClassChange
-									}
-									onBlur={
-										errors.firstName
-											? removeNameClassChange
-											: handleNameClassChange
-									}
+									// onFocus={
+									// 	errors.firstName
+									// 		? removeNameClassChange
+									// 		: handleNameClassChange
+									// }
+									onBlur={() => {
+										errors.firstName || firstNameValue.length < 2
+											? removeNameClassChange()
+											: handleNameClassChange()
+									}}
 									// onChange={
 									// 	errors.firstName
 									// 		? removeNameClassChange
@@ -361,7 +382,9 @@ const Booking = () => {
 											definitions={{
 												0: /[0-9]/,
 											}}
-											placeholder='Телефон*'
+											placeholder={
+												isFocused ? '+7 (___) ___-__-__' : 'Телефон*'
+											}
 											value={field.value}
 											onAccept={value => field.onChange(value)}
 											inputRef={input => {
@@ -373,13 +396,15 @@ const Booking = () => {
 											className={`input-form ${addPhoneClass}`}
 											onFocus={() => {
 												setShowPhoneMask(true)
-												errors.phone
-													? removePhoneClassChange()
-													: handlePhoneClassChange()
+												handleFocus()
+												// errors.phone
+												// 	? removePhoneClassChange()
+												// 	: handlePhoneClassChange()
 											}}
 											onBlur={() => {
 												setShowPhoneMask(false)
-												errors.phone
+												handleBlur()
+												errors.phone || phoneValue.length < 18
 													? removePhoneClassChange()
 													: handlePhoneClassChange()
 											}}
@@ -400,7 +425,7 @@ const Booking = () => {
 
 							{isValid && (
 								<div className='booking__price'>
-									Сумма предоплаты: <p>30 000 ₽</p>
+									Сумма предоплаты: <p>5 000 ₽</p>
 								</div>
 							)}
 

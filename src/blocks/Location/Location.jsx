@@ -221,7 +221,7 @@ const Location = () => {
 
 							<a
 								className='button location__button button__green'
-								onClick={() => scrollToTarget('questions')}
+								onClick={() => scrollToTarget('booking-form')}
 							>
 								Забронировать
 							</a>
