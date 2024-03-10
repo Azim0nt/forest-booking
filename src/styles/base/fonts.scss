@@ -50,3 +50,12 @@
 	font-weight: 400;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'Kurier';
+	src: local('Kurier Heavy'), local('KurierHeavy-Regular'), 
+	url('/fonts/kurierheavy.woff2') format('woff2'), 
+	url('/fonts/kurierheavy.woff') format('woff'), 
+	url('/fonts/kurierheavy.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+  }

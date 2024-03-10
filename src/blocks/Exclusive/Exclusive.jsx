@@ -3,6 +3,7 @@ import './Exclusive.scss'
 import exclusiveImage1 from '/images/exclusive/1.jpeg'
 import exclusiveImage2 from '/images/exclusive/2.jpeg'
 import exclusiveImage3 from '/images/exclusive/3.jpeg'
+import {Arrow} from '../../components/Arrow/Arrow'
 
 const Exclusive = () => {
 	return (
@@ -55,6 +56,7 @@ const Exclusive = () => {
 						</div>
 					</div>
 				</div>
+				<Arrow />
 			</div>
 		</>
 	)

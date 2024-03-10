@@ -1,3 +1,14 @@
+.usov{
+	display: flex;
+}
+.usov a{
+	text-decoration: none;
+}
+.usov p{
+	color: var(--text-white);
+	font-family: 'Kurier', sans-serif;
+}
+
 .footer {
 	margin-top: 32px;
 	margin-bottom: 66px;

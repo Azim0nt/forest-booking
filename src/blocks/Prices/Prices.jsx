@@ -32,7 +32,7 @@ const Prices = () => {
 									<ul className='prices__addservices-list'>
 										<li>Банный чан</li>
 										<li>
-											<a href='#exclusive'>Дополнительные услуги</a>
+											<a href='#exclusive' onClick={() => setShowMenuBurger('')}>Дополнительные услуги</a>
 										</li>
 									</ul>
 								</div>
@@ -50,10 +50,10 @@ const Prices = () => {
 										<p className='prices__day-title'>Посуточная аренда</p>
 										<ul>
 											<li>
-												Вс-Чт<span>20 000 ₽/сут.</span>
+												Вс-Чт<span>20 000 <span className='rub'>₽</span>/сут.</span>
 											</li>
 											<li>
-												Пт-Вс<span>30 000 ₽/сут.</span>
+												Пт-Вс<span>30 000 <span className='rub'>₽</span>/сут.</span>
 											</li>
 										</ul>
 										<p className='prices__day-text'>
@@ -85,14 +85,14 @@ const Prices = () => {
 											<br />
 											<br />
 											Бронируйте проживание на 2-е суток с пятницы по
-											воскресенье, всего за <span>45 000 ₽</span>.
+											воскресенье, всего за <span>45 000 <span className='rub'>₽</span></span>.
 										</p>
 									</div>
 								</div>
 								<div className='prices__hour'>
 									<div className='prices__hour-title'>Почасовая аренда</div>
 									<div className='prices__hour-two'>
-										<p className='prices__hour-price'>2 000 ₽/сут.</p>
+										<p className='prices__hour-price'>2 000 <span className='rub'>₽</span>/сут.</p>
 										<p className='prices__hour-time'>от 4 часов</p>
 									</div>
 									<p className='prices__hour-text'>
@@ -101,7 +101,7 @@ const Prices = () => {
 								</div>
 								<div className='prices__vat'>
 									<div className='prices__vat-title'>Почасовая аренда</div>
-									<p className='prices__vat-price'>от 5 000 ₽/сут.</p>
+									<p className='prices__vat-price'>от 5 000 <span className='rub'>₽</span>/сут.</p>
 									<p className='prices__vat-text'>
 										*Бронируется заранее, так как для его подготовки необходимо
 										время. Подробности уточняйте у администратора
@@ -120,14 +120,14 @@ const Prices = () => {
 									</h3>
 									<ul className='prices__rules-list'>
 										<li>
-											Предоплата <span>5 000 ₽</span>
+											Предоплата <span>5 000 <span className='rub'>₽</span></span>
 										</li>
 										<li>
 											Предоплата не возвращается при отмене бронирования менее,
 											чем за 72 часа до даты заезда
 										</li>
 										<li>
-											При заезде необходимо внести залог <span>10 000 ₽</span>
+											При заезде необходимо внести залог <span>10 000 <span className='rub'>₽</span></span>
 											<br />
 											Залог возвращается при условии сохранности имущества в
 											доме
@@ -169,7 +169,7 @@ const Prices = () => {
 									<li>
 										<img src={notImage} alt='not' />
 										<p>
-											У нас в доме не курят. Штраф <strong>10 000 ₽</strong>
+											У нас в доме не курят. Штраф <strong>10 000 <span className='rub'>₽</span></strong>
 										</p>
 									</li>
 									<li>

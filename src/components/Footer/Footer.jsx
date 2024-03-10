@@ -66,6 +66,7 @@ function Footer() {
 									Свердловская область, г. Березовский, ул. Старателей, д. 2-21
 								</p>
 							</div>
+							
 						</div>
 						<div className='footer__bottom'>
 							<a href='#'>Designed by UsovStudio</a>

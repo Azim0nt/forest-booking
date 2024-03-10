@@ -21,6 +21,8 @@ const Form = () => {
 	const [showPhoneMask, setShowPhoneMask] = useState(false)
 	const [isFocused, setIsFocused] = useState(false)
 
+
+
 	const handleFocus = () => {
 		setIsFocused(true)
 	}
@@ -141,7 +143,17 @@ const Form = () => {
 
 	const inputRef = useRef(null)
 
+
+
 	// const onSubmit = data => console.log(data)
+
+	const [emailInput, setEmailInput] = useState(false)
+
+
+	function changeHandler(evt) {
+		if(evt.value === "Email") setEmailInput(true)
+		else setEmailInput(false)
+	}
 
 	return (
 		hasMounted && (
@@ -172,37 +184,44 @@ const Form = () => {
 					control={control}
 					render={({ field }) => (
 						<div className='input__wrapper'>
-							<IMaskInput
-								mask={showPhoneMask ? '+{7} (000) 000-00-00' : ''}
-								definitions={{
-									0: /[0-9]/,
-								}}
-								placeholder={isFocused ? '+7 (___) ___-__-__' : 'Телефон*'}
-								value={field.value}
-								onAccept={value => field.onChange(value)}
-								inputRef={input => {
-									field.ref(input)
-									if (errors.phone) {
-										input.focus()
-									}
-								}}
+							  {emailInput ? (
+							  <input 
+								type='email' 
+								placeholder='example@mail.ru'
 								className={`input-form ${addPhoneClass}`}
-								onFocus={() => {
-									setShowPhoneMask(true)
-									handleFocus()
-									// errors.phone
-									// 	? removePhoneClassChange()
-									// 	: handlePhoneClassChange()
-								}}
-								onBlur={() => {
-									setShowPhoneMask(false)
-									handleBlur()
-									errors.phone || phoneValue.length < 18
-										? removePhoneClassChange()
-										: handlePhoneClassChange()
-								}}
-								aria-invalid={errors.phone ? 'true' : 'false'}
-							/>
+							  />
+							  ) : (
+							  	<IMaskInput
+									mask={showPhoneMask ? '+{7} (000) 000-00-00' : ''}
+									definitions={{
+										0: /[0-9]/,
+									}}
+									placeholder={isFocused ? '+7 (___) ___-__-__' : '+7 (___) ___-__-__'}
+									value={field.value}
+									onAccept={value => field.onChange(value)}
+									inputRef={input => {
+										field.ref(input)
+										if (errors.phone) {
+											input.focus()
+										}
+									}}
+									className={`input-form ${addPhoneClass}`}
+									onFocus={() => {
+										setShowPhoneMask(true)
+										handleFocus()
+										// errors.phone
+										// 	? removePhoneClassChange()
+										// 	: handlePhoneClassChange()
+									}}
+									onBlur={() => {
+										setShowPhoneMask(false)
+										handleBlur()
+										errors.phone || phoneValue.length < 18
+											? removePhoneClassChange()
+											: handlePhoneClassChange()
+									}}
+									aria-invalid={errors.phone ? 'true' : 'false'}
+							/>)}
 							{errors.phone ? (
 								<img className='error-icon' src={errorImage} alt='error' />
 							) : (
@@ -233,6 +252,9 @@ const Form = () => {
 									if (field.value && field.value.value) {
 										selectClass()
 									}
+								}}
+								onChange={(evt) => {
+									changeHandler(evt);
 								}}
 								styles={{
 									control: (baseStyles, { isFocused }) => ({
@@ -274,11 +296,11 @@ const Form = () => {
 						// 		? removeTextAreaClassChange
 						// 		: handleTextAreaClassChange
 						// }
-						onBlur={
-							errors.textarea || watch('textarea').length < 1
-								? removeTextAreaClassChange
-								: handleTextAreaClassChange
-						}
+						// onBlur={
+						// 	// errors.textarea || watch('textarea').length < 1
+						// 		? removeTextAreaClassChange
+						// 		: handleTextAreaClassChange
+						// }
 					/>
 					{errors.textarea && (
 						<img className='error-icon' src={errorImage} alt='error' />
