@@ -169,9 +169,9 @@ const Booking = () => {
 
 		try {
 			const response = await fetch(
-				// `https://api.telegram.org/bot${
-				// 	import.meta.env.VITE_TELEGRAM_TOKEN
-				// }/sendMessage`,
+				`https://api.telegram.org/bot${
+					import.meta.env.VITE_TELEGRAM_TOKEN
+				}/sendMessage`,
 				{
 					method: 'POST',
 					headers: {
@@ -310,7 +310,9 @@ const Booking = () => {
 											className='react-select-container'
 											classNamePrefix={'react-select'}
 											onMenuClose={() => {
-												selectValue.value != undefined ? selectClass() : null
+												if (selectValue.value === undefined) {
+													selectClass()
+												}
 											}}
 											styles={{
 												control: (baseStyles, { isFocused }) => ({

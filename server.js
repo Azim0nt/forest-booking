@@ -6,7 +6,7 @@ import sirv from 'sirv'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 80
 const base = process.env.BASE || '/'
 
 if (process.env.NODE_ENV === 'production') {

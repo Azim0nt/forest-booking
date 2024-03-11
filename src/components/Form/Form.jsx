@@ -229,10 +229,9 @@ const Form = () => {
 								instanceId={useId()}
 								className='react-select-container'
 								classNamePrefix={'react-select'}
-								onMenuClose={() => {
-									if (field.value && field.value.value) {
-										selectClass()
-									}
+								onChange={selectedOption => {
+									field.onChange(selectedOption)
+									selectClass() // Вызов функции при выборе элемента
 								}}
 								styles={{
 									control: (baseStyles, { isFocused }) => ({
@@ -256,6 +255,7 @@ const Form = () => {
 									}),
 								}}
 							/>
+
 							{errors.select && (
 								<img className='error-icon' src={errorImage} alt='error' />
 							)}
@@ -269,17 +269,13 @@ const Form = () => {
 						aria-invalid={errors.textarea ? 'true' : 'false'}
 						placeholder='Комментарий (необязательное поле)'
 						className={`textarea-form ${addTextAreaClass}`}
-						// onFocus={
-						// 	errors.textarea
-						// 		? removeTextAreaClassChange
-						// 		: handleTextAreaClassChange
-						// }
 						onBlur={
-							errors.textarea || watch('textarea').length < 1
+							errors.textarea || watch('textarea')?.length < 1
 								? removeTextAreaClassChange
 								: handleTextAreaClassChange
 						}
 					/>
+
 					{errors.textarea && (
 						<img className='error-icon' src={errorImage} alt='error' />
 					)}

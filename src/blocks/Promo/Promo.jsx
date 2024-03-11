@@ -133,7 +133,28 @@ const Promo = () => {
 								</div>
 
 								<a href='#home' className='promo__arrow'>
-									<img src={arrow} alt='arrow' />
+									<svg
+										width='56'
+										height='56'
+										viewBox='0 0 56 56'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+									>
+										<path
+											d='M16.332 16.3359H39.6654V39.6693'
+											stroke='#232221'
+											strokeWidth='4'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+										<path
+											d='M16.332 39.6693L39.6654 16.3359'
+											stroke='#232221'
+											strokeWidth='4'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
 								</a>
 							</div>
 							<Swiper

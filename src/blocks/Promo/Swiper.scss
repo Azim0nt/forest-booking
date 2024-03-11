@@ -41,6 +41,7 @@
 	}
 
 	&__arrow {
+		transition: all 0.5s ease;
 		width: 88px;
 		height: 88px;
 		border-radius: 24px;
@@ -52,9 +53,33 @@
 		align-items: center;
 		cursor: pointer;
 
-		img {
+		svg {
 			width: 70%;
 			height: 70%;
+		}
+
+		&:hover {
+			box-shadow: inset -2px -2px 10px 0 rgba(24, 36, 26, 0.45),
+				inset 2px 2px 10px 0 rgba(24, 36, 26, 0.45);
+			background: var(--zelenyy);
+
+			svg {
+				path {
+					stroke: #f7fdfb;
+				}
+			}
+		}
+
+		&:active {
+			box-shadow: inset 2px 2px 10px 0 rgba(24, 36, 26, 0.25),
+				inset 2px 2px 10px 0 rgba(24, 36, 26, 0.25);
+			background: var(--zelenyy);
+
+			svg {
+				path {
+					stroke: #f7fdfb;
+				}
+			}
 		}
 	}
 
