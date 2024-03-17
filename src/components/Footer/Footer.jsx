@@ -69,7 +69,7 @@ function Footer() {
 						</div>
 						<div className='footer__bottom'>
 							<a href='#'>Designed by UsovStudio</a>
-							<a href='#'>Политика конфиденциальности</a>
+							<a href="/documents/Политика_конфиденциальности_Время_Леса_1.pdf" download>Политика конфиденциальности</a>
 						</div>
 					</div>
 				</div>
