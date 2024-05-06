@@ -101,7 +101,7 @@ const Prices = () => {
 								</div>
 								<div className='prices__vat'>
 									<div className='prices__vat-title'>Банный чан</div>
-									<p className='prices__vat-price'>от 5 000 ₽/топка</p>
+									<p className='prices__vat-price'>от 10 000 ₽/топка</p>
 									<p className='prices__vat-text'>
 										*Бронируется заранее, так как для его подготовки необходимо
 										время. Подробности уточняйте у администратора
