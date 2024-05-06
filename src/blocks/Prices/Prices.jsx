@@ -94,6 +94,8 @@ const Prices = () => {
 									<div className='prices__hour-two'>
 										<p className='prices__hour-price'>2 000 ₽/сут.</p>
 										<p className='prices__hour-time'>от 4 часов</p>
+
+										
 									</div>
 									<p className='prices__hour-text'>
 										*Для фотосъёмок только в дневное время без ночёвки
