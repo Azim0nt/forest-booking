@@ -37,7 +37,7 @@ const Prices = () => {
 									</ul>
 								</div>
 								<div className='prices__addservices-image'>
-									<img src='/images/swiper-promo/slide2.jpeg' alt='forest' />
+									<img src='/images/swiper-promo/slide2.webp' alt='forest' />
 								</div>
 							</div>
 						</div>

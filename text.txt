@@ -1,0 +1,25 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html/dist/client;
+    index index.html;
+    server_name ваш-домен.com; 
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+    location /fonts/ {
+        alias /var/www/html/dist/client/fonts/;
+    }
+    location /icons/ {
+        alias /var/www/html/dist/client/icons/;
+    }
+    location /images/ {
+        alias /var/www/html/dist/client/images/;
+    }
+    location /video/ {
+        alias /var/www/html/dist/client/video/;
+    }
+    # listen 443 ssl default_server;
+    # listen [::]:443 ssl default_server;
+    # include snippets/snakeoil.conf;
+}

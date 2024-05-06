@@ -184,16 +184,16 @@ const Promo = () => {
 								}}
 							>
 								<SwiperSlide>
-									<img src='/images/swiper-promo/slide1.jpeg' alt='slide1' />
+									<img src='/images/swiper-promo/slide1.webp' alt='slide1' />
 								</SwiperSlide>
 								<SwiperSlide>
-									<img src='/images/swiper-promo/slide2.jpeg' alt='slide2' />
+									<img src='/images/swiper-promo/slide2.webp' alt='slide2' />
 								</SwiperSlide>
 								<SwiperSlide>
-									<img src='/images/swiper-promo/slide3.jpeg' alt='slide3' />
+									<img src='/images/swiper-promo/slide3.webp' alt='slide3' />
 								</SwiperSlide>
 								<SwiperSlide>
-									<img src='/images/swiper-promo/slide4.jpeg' alt='slide4' />
+									<img src='/images/swiper-promo/slide4.webp' alt='slide4' />
 								</SwiperSlide>
 							</Swiper>
 							<div className='promo__navigation'>

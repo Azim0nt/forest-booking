@@ -1,7 +1,7 @@
 import Title from '../../components/Title/Title'
 import './Atmosphere.scss'
 import { useState } from 'react'
-import atmosphereImage from '/images/swiper-promo/slide4.jpeg'
+import atmosphereImage from '/images/swiper-promo/slide4.webp'
 
 const Atmosphere = () => {
 	return (
